@@ -1,0 +1,58 @@
+﻿@using Majunga.Libraries.RazorComponents.Services
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Routing
+
+@inject AlertState AppState
+@inject NavigationManager NavigationManager
+@implements IDisposable
+
+
+@if (!string.IsNullOrWhiteSpace(AppState.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @AppState.ErrorMessage
+    </div>
+}
+@if (!string.IsNullOrWhiteSpace(AppState.WarningMessage))
+{
+    <div class="alert alert-warning" role="alert">
+        @AppState.WarningMessage
+    </div>
+}
+@if (!string.IsNullOrWhiteSpace(AppState.InfoMessage))
+{
+    <div class="alert alert-info" role="alert">
+        @AppState.InfoMessage
+    </div>
+}
+@if (!string.IsNullOrWhiteSpace(AppState.SuccessMessage))
+{
+    <div class="alert alert-success" role="alert">
+        @AppState.SuccessMessage
+    </div>
+}
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        AppState.OnChange += StateHasChanged;
+
+        // Subscribe to the event
+        NavigationManager.LocationChanged += LocationChanged;
+        base.OnInitialized();
+    }
+
+    void LocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        AppState.ClearAll();
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+
+        // Unsubscribe from the event when our component is disposed
+        NavigationManager.LocationChanged -= LocationChanged;
+    }
+}
