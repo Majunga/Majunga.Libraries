@@ -1,0 +1,52 @@
+﻿<div class="modal @_popupClass" tabindex="-1" role="dialog" id="@Id" style="display:@_popupDisplay" aria-hidden="@(string.IsNullOrEmpty(_popupClass) ? true : false )">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            @ChildContent
+        </div>
+    </div>
+</div>
+
+@if (_showBackdrop)
+{
+    <div @onclick="this.Hide" class="modal-backdrop fade show"></div>
+}
+
+@code {
+    private string _popupDisplay = "none;";
+    private string _popupClass = "";
+    private bool _showBackdrop = false;
+
+    [Parameter] public string Id { get; set; } = "PopupWindow";
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    [Parameter] public EventCallback? OnHide { get; set; }
+    [Parameter] public EventCallback? OnShow { get; set; }
+
+    public async Task Show()
+    {
+        _popupDisplay = "block";
+        _popupClass = "show";
+        _showBackdrop = true;
+
+        if(this.OnShow != null)
+        {
+            await this.OnShow?.InvokeAsync(null);
+        }
+
+        StateHasChanged();
+    }
+
+    public async Task Hide()
+    {
+        _popupDisplay = "none";
+        _popupClass = "";
+        _showBackdrop = false;
+
+        if (this.OnHide != null)
+        {
+            await this.OnHide?.InvokeAsync(null);
+        }
+
+        StateHasChanged();
+    }
+}

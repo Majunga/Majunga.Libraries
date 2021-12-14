@@ -1,0 +1,20 @@
+﻿<div class="card" style="width: @(Width)rem;">
+    @if (string.IsNullOrWhiteSpace(ImageSrc) == false)
+    {
+        <img class="card-img-top" src="@ImageSrc" alt="Card image cap">
+    }
+    <div class="card-body">
+    @ChildContent
+  </div>
+</div>
+
+@code {
+    [Parameter]
+    public string? ImageSrc { get; set; }
+
+    [Parameter]
+    public int? Width { get; set; } = 18;
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

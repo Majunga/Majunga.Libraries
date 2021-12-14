@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+
+<EditForm Model="@Model" OnValidSubmit="@OnValidSubmit" role="form" class="col-md-12">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    @ChildContent
+</EditForm>
+
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
+    [Parameter] public @Object Model { get; set; }
+}
