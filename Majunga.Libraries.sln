@@ -5,6 +5,11 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majunga.Libraries.RazorComponents", "RazorComponents\Majunga.Libraries.RazorComponents.csproj", "{6FB98C09-EDBE-4A3D-A0DA-B9A40C45CA7E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{F8831353-3F91-489D-AA1E-C7965294E230}"
+	ProjectSection(SolutionItems) = preProject
+		RazorComponentsPipeline.yml = RazorComponentsPipeline.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
