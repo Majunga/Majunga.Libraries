@@ -7,11 +7,19 @@ pool:
   name: "Default"
 
 variables:
-  projectPath: './RazorComponents/Majunga.Libraries.RazorComponents.csproj'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
-  versionSuffix: ${{ if isMain}}:$(Build.SourceBranchName)$(Build.BuildId)
+  - name: projectPath
+    value: './RazorComponents/Majunga.Libraries.RazorComponents.csproj'
+  - name: buildPlatform
+    value: 'Any CPU'
+  - name: buildConfiguration
+    value: 'Release'
+  - name: isMain
+    value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+  - name: versionSuffix
+    ${{ if eq(isMain, true) }}:
+        value: $(Build.SourceBranchName)$(Build.BuildId)
+    ${{ else }}:
+        value: ""
 
 steps:
 - task: PowerShell@2
