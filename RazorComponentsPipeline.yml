@@ -1,5 +1,7 @@
 trigger:
-- main
+  branches:
+    include:
+    - '*'
 
 pool:
   name: "Default"
@@ -8,6 +10,8 @@ variables:
   projectPath: './RazorComponents/Majunga.Libraries.RazorComponents.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+  versionSuffix: $(Build.SourceBranch)$(Build.BuildId)
 
 steps:
 - task: PowerShell@2
@@ -17,7 +21,7 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: inline
-    script: 'dotnet.exe pack $(projectPath) --output $(Build.ArtifactStagingDirectory) /p:Configuration=Release --verbosity Detailed'
+    script: 'dotnet.exe pack $(projectPath) --version-suffix $(versionSuffix) --runtime browser-wasm --output $(Build.ArtifactStagingDirectory) /p:Configuration=Release --verbosity Detailed'
 
 - task: NuGetCommand@2
   inputs:
