@@ -1,16 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-	 <UseBlazorWebAssembly>true</UseBlazorWebAssembly>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>6.0.1-pleasework</Version>
+    <Version>6.0.1-pleasework1</Version>
     <PackageReleaseNotes>Init Release, set to version 6 to be inline with dotnet 6.0</PackageReleaseNotes>
   </PropertyGroup>
-
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
