@@ -11,8 +11,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
-  ${{ if isMain}}:
-  versionSuffix: $(Build.SourceBranchName)$(Build.BuildId)
+  versionSuffix: ${{ if isMain}}:$(Build.SourceBranchName)$(Build.BuildId)
 
 steps:
 - task: PowerShell@2
