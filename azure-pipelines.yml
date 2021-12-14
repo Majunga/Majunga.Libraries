@@ -1,0 +1,28 @@
+trigger:
+- main
+
+pool:
+  name: "Default"
+
+variables:
+  projectPath: '**\Majunga.Libraries.RazorComponents.csproj'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    script: 'dotnet.exe build $(projectPath) /p:Configuration=Release --verbosity Detailed'
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    script: 'dotnet.exe pack $(projectPath) --output $(Build.ArtifactStagingDirectory) /p:Configuration=Release --verbosity Detailed'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: 'Majunga'
+    allowPackageConflicts: true
