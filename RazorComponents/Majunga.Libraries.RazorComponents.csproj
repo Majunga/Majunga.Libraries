@@ -2,9 +2,9 @@
 
 	<PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-	  <Nullable>enable</Nullable>
+    <UseBlazorWebAssembly>true</UseBlazorWebAssembly>
+	<Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	<VersionPrefix>6.0.1</VersionPrefix>
     <PackageReleaseNotes>Init Release, set to version 6 to be inline with dotnet 6.0</PackageReleaseNotes>
