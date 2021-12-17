@@ -29,7 +29,7 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: inline
-    ${{ if eq(variables['isMain'], 'False') }}:
+    ${{ if eq(variables['isMain'], False) }}:
         script: 'dotnet pack $(projectPath) --version-suffix $(Build.SourceBranchName)$(Build.BuildId) --runtime browser-wasm --output $(Build.ArtifactStagingDirectory) /p:Configuration=Release --verbosity Detailed'
     ${{ else }}:
         script: 'dotnet pack $(projectPath) --runtime browser-wasm --output $(Build.ArtifactStagingDirectory) /p:Configuration=Release --verbosity Detailed'
