@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
 
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>6.0.1</Version>
+	<VersionPrefix>6.0.1</VersionPrefix>
     <PackageReleaseNotes>Init Release, set to version 6 to be inline with dotnet 6.0</PackageReleaseNotes>
   </PropertyGroup>
 	<ItemGroup>
