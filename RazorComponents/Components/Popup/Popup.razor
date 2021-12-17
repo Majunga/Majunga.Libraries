@@ -1,4 +1,6 @@
-﻿<div class="modal @_popupClass" tabindex="-1" role="dialog" id="@Id" style="display:@_popupDisplay" aria-hidden="@(string.IsNullOrEmpty(_popupClass) ? true : false )">
+﻿@namespace Majunga.Libraries.RazorComponents.Components.Popup
+
+<div class="modal @_popupClass" tabindex="-1" role="dialog" id="@Id" style="display:@_popupDisplay" aria-hidden="@(string.IsNullOrEmpty(_popupClass) ? true : false )">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             @ChildContent

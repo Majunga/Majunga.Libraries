@@ -1,4 +1,6 @@
-﻿<div class="card" style="width: @(Width)rem;">
+﻿@namespace Majunga.Libraries.RazorComponents.Components.Cards
+
+<div class="card" style="width: @(Width)rem;">
     @if (string.IsNullOrWhiteSpace(ImageSrc) == false)
     {
         <img class="card-img-top" src="@ImageSrc" alt="Card image cap">

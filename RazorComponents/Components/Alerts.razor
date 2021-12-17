@@ -1,11 +1,12 @@
-﻿@using Majunga.Libraries.RazorComponents.Services
+﻿@namespace Majunga.Libraries.RazorComponents.Components
+
+@using Majunga.Libraries.RazorComponents.Services
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Routing
 
 @inject AlertState AppState
 @inject NavigationManager NavigationManager
 @implements IDisposable
-
 
 @if (!string.IsNullOrWhiteSpace(AppState.ErrorMessage))
 {
