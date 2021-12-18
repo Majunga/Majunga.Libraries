@@ -2,14 +2,13 @@ trigger:
   branches:
     include:
     - '*'
-    
 
 pool:
   name: "Default"
 
 variables:
   - name: projectPath
-    value: './RazorComponents/Majunga.Libraries.RazorComponents.csproj'
+    value: './Client/Majunga.Libraries.Client.csproj'
   - name: buildPlatform
     value: 'Any CPU'
   - name: buildConfiguration
