@@ -2,7 +2,10 @@ trigger:
   branches:
     include:
     - '*'
-
+  paths:
+    include:
+      - "./Client/**/*"
+      
 pool:
   name: "Default"
 
