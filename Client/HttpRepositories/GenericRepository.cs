@@ -84,7 +84,7 @@ namespace Majunga.Libraries.Client.HttpRepositories
         }
 
         /// <summary>
-        /// Put Data to API
+        /// Put Data to API 
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="HttpRequestException"></exception>
