@@ -1,19 +1,18 @@
-name: Majunga.Libraries.RazorComponents
-
+name: Majunga.Libraries.Client
 trigger:
   branches:
     include:
     - '*'
   paths:
     include:
-      - "RazorComponents/**/*"
-
+      - "Client/*"
+      
 pool:
   name: "Default"
 
 variables:
   - name: projectPath
-    value: './RazorComponents/Majunga.Libraries.RazorComponents.csproj'
+    value: './Client/Majunga.Libraries.Client.csproj'
   - name: buildPlatform
     value: 'Any CPU'
   - name: buildConfiguration
