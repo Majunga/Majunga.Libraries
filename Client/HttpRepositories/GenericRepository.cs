@@ -33,7 +33,7 @@ namespace Majunga.Libraries.Client.HttpRepositories
         }
 
         /// <summary>
-        /// Get List of Data from API
+        /// Get List of Data from API 
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="HttpRequestException"></exception>
