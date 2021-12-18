@@ -1,3 +1,5 @@
+name: Majunga.Libraries.RazorComponents
+
 trigger:
   branches:
     include:

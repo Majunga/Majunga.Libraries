@@ -1,3 +1,4 @@
+name: Majunga.Libraries.Client
 trigger:
   branches:
     include:
