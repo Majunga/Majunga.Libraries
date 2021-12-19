@@ -2,7 +2,7 @@ name: Majunga.Libraries.Client
 trigger:
   branches:
     include:
-    - '*'
+    - '**/*'
   paths:
     include:
       - "Client/*"
