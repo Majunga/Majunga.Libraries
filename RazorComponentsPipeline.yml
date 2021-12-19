@@ -3,9 +3,10 @@ name: Majunga.Libraries.RazorComponents
 trigger:
   branches:
     include:
-    - '*'
+    - '**/*'
   paths:
     include:
+      - "RazorComponentsPipeline.yml"
       - "RazorComponents/**/*"
 
 pool:
