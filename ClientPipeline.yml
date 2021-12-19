@@ -5,6 +5,7 @@ trigger:
     - '**/*'
   paths:
     include:
+      - "ClientPipeline.yml"
       - "Client/*"
       
 pool:
