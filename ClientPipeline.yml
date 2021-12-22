@@ -2,9 +2,10 @@ name: Majunga.Libraries.Client
 trigger:
   branches:
     include:
-    - '*'
+    - '**/*'
   paths:
     include:
+      - "ClientPipeline.yml"
       - "Client/*"
       
 pool:
