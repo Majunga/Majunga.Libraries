@@ -3,6 +3,7 @@ trigger:
   branches:
     include:
     - '**/*'
+    - '*'
   paths:
     include:
       - "ClientPipeline.yml"
