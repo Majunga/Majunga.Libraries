@@ -1,6 +1,7 @@
 ﻿@namespace Majunga.Libraries.RazorComponents.Components.Cards
 
-<h5 class="card-title">@ChildContent</h5>
+<p class="card-header">@ChildContent</p>
+
 @code {
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
