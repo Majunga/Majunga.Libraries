@@ -5,7 +5,7 @@
 	<Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<VersionPrefix>6.0.7</VersionPrefix>
+	<VersionPrefix>6.0.8</VersionPrefix>
     <PackageReleaseNotes>Added Text Alignment</PackageReleaseNotes>
 	<EnableDefaultContentItems>true</EnableDefaultContentItems>
 	<RazorCompileOnPublish>true</RazorCompileOnPublish>
