@@ -1,33 +1,12 @@
 ﻿@namespace Majunga.Libraries.RazorComponents.Components.Cards
 
 <div class="card-body" @attributes="AdditionalAttributes">
-    @if(Title is not null)
-    {
-        @Title    
-    }
-    @if(Subtitle is not null)
-    {
-        @Subtitle    
-    }
-    @if(Text is not null)
-    {
-        @Text    
-    }
-
     @ChildContent
 </div>
 @code {
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
-    [Parameter]
-    public CardText? Text { get; set; }
-
-    [Parameter]
-    public CardTitle? Title { get; set; }
-
-    [Parameter]
-    public CardSubtitle? Subtitle { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 }

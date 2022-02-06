@@ -1,40 +1,12 @@
 ﻿@namespace Majunga.Libraries.RazorComponents.Components.Cards
 
 <div class="card" style="width: 18rem;" @attributes="AdditionalAttributes">
-    @if (ImageSrc is not null)
-    {
-        @ImageSrc
-    }
-
-    @if(Header is not null)
-    {
-        @Header
-    }
-
-    @if(Body is not null)
-    {
-        @Body
-    }
-
-    @if(Footer is not null)
-    {
-        @Footer
-    }
-
+    @ChildContent
 </div>
 
 @code {
     [Parameter]
-    public CardImage? ImageSrc { get; set; }
-
-    [Parameter]
-    public CardHeader? Header { get; set; }
-
-    [Parameter]
-    public CardBody? Body { get; set; }
-
-    [Parameter]
-    public CardFooter? Footer { get; set; }
+    public RenderFragment? ChildContent { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 }
