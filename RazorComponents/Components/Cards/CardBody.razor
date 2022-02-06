@@ -1,9 +1,12 @@
 ﻿@namespace Majunga.Libraries.RazorComponents.Components.Cards
 
-<h5 class="card-title" @attributes="AdditionalAttributes">@ChildContent</h5>
+<div class="card-body" @attributes="AdditionalAttributes">
+    @ChildContent
+</div>
 @code {
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
+
 
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 }

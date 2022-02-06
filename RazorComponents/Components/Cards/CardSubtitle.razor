@@ -1,6 +1,6 @@
 ﻿@namespace Majunga.Libraries.RazorComponents.Components.Cards
 
-<h5 class="card-title" @attributes="AdditionalAttributes">@ChildContent</h5>
+<h6 class="card-subtitle mb-2 text-muted" @attributes="AdditionalAttributes">@ChildContent</h6>
 @code {
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
