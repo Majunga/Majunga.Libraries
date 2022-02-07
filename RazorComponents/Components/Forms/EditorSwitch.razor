@@ -3,13 +3,21 @@
 @using System.Linq.Expressions
 
 <div class="custom-control custom-switch">
-    <label class="custom-control-label" for="@For">
-        @OffLabel
-    </label>
+    @if (string.IsNullOrWhiteSpace(OffLabel) == false)
+    {
+        <label class="custom-control-label" for="@For">
+            @OffLabel
+        </label>
+    }
+
     <InputCheckbox class="custom-control-input" id="@For" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="AdditionalAttributes" />
-    <label class="custom-control-label" for="@For">
-        @OnLabel
-    </label>
+    
+    @if (string.IsNullOrWhiteSpace(OffLabel) == false)
+    {
+        <label class="custom-control-label" for="@For">
+            @OnLabel
+        </label>
+    }
 </div>
 @code {
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
