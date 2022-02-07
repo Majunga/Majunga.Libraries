@@ -3,16 +3,19 @@
 @using System.Linq.Expressions
 
 <div class="custom-control custom-switch">
-    <InputCheckbox class="@Class" id="@Id" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="AdditionalAttributes" />
-    <label class="custom-control-label" for="@Id">
-        @Label
+    <label class="custom-control-label" for="@For">
+        @OffLabel
+    </label>
+    <InputCheckbox class="custom-control-input" id="@For" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="AdditionalAttributes" />
+    <label class="custom-control-label" for="@For">
+        @OnLabel
     </label>
 </div>
 @code {
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-    [Parameter] public string Id { get; set; }
-    [Parameter] public string Class { get; set; }
-    [Parameter] public string Label { get; set; }
+    [Parameter] public string OffLabel { get; set; }
+    [Parameter] public string OnLabel { get; set; }
+    [Parameter] public string For { get; set; }
 
     [Parameter] public bool Value { get; set; }
     [Parameter] public EventCallback<bool> ValueChanged { get; set; }
@@ -20,8 +23,6 @@
 
     protected override Task OnInitializedAsync()
     {
-        this.Class = string.Join(' ', "custom-control-input", this.Class);
-
         return base.OnInitializedAsync();
     }
 }
