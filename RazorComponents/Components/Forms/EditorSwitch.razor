@@ -5,16 +5,16 @@
 <div class="custom-control custom-switch">
     @if (string.IsNullOrWhiteSpace(OffLabel) == false)
     {
-        <label class="custom-control-label" for="@For">
+        <label class="custom-control-label" for="@Id">
             @OffLabel
         </label>
     }
 
-    <InputCheckbox class="custom-control-input" id="@For" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="AdditionalAttributes" />
+    <InputCheckbox class="custom-control-input" id="@Id" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="AdditionalAttributes" />
     
     @if (string.IsNullOrWhiteSpace(OffLabel) == false)
     {
-        <label class="custom-control-label" for="@For">
+        <label class="custom-control-label" for="@Id">
             @OnLabel
         </label>
     }
@@ -23,7 +23,7 @@
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
     [Parameter] public string OffLabel { get; set; }
     [Parameter] public string OnLabel { get; set; }
-    [Parameter] public string For { get; set; }
+    [Parameter] public string Id { get; set; }
 
     [Parameter] public bool Value { get; set; }
     [Parameter] public EventCallback<bool> ValueChanged { get; set; }
