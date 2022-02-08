@@ -1,0 +1,24 @@
+﻿@page "/editorenumdropdown"
+@using Majunga.Libraries.RazorComponents.Components.Forms
+@using Majunga.Libraries.RazorComponents.Services
+@inject AlertState AlertState
+
+<EditorForm Model="@Selected">
+    <EditorEnumDropdown @bind-Value="Selected" />
+    
+
+    Selected value: @Selected
+</EditorForm>
+
+
+@code {
+    private TestModel Selected = 0;
+
+    enum TestModel
+    {
+        Undefined = 0,
+        One,
+        Two,
+        Three
+    }
+}
