@@ -1,5 +1,5 @@
 ﻿@namespace Majunga.Libraries.RazorComponents.Components.Forms
-@typeparam TItem where TItem : Enum
+@typeparam TEnum
 
 @using System.Linq.Expressions
 <div class="form-group">
@@ -12,7 +12,7 @@
         {
             @if(i == 0 && string.IsNullOrWhiteSpace(DefaultValue) == false)
             {
-                <option value="@item.Key">@DefaultValue</option>
+                <option value="@item.Key" selected>@DefaultValue</option>
             }
             else
             {
@@ -25,20 +25,20 @@
 </div>
 
 @code {
-    private Dictionary<TItem, string>? Items { get; set; }
-    [Parameter] public RenderFragment<TItem>? OptionsTemplate { get; set; }
+    private Dictionary<TEnum, string>? Items { get; set; }
+    [Parameter] public RenderFragment<TEnum>? OptionsTemplate { get; set; }
 
     [Parameter] public string DefaultValue { get; set; } = "Please Select";
 
-    [Parameter] public TItem                   Value           { get; set; }
-    [Parameter] public EventCallback<TItem>    ValueChanged    { get; set; }
-    [Parameter] public Expression<Func<TItem>> ValueExpression { get; set; }
+    [Parameter] public TEnum?                   Value           { get; set; }
+    [Parameter] public EventCallback<TEnum?>    ValueChanged    { get; set; }
+    [Parameter] public Expression<Func<TEnum?>> ValueExpression { get; set; }
 
     protected override Task OnInitializedAsync()
     {
-        Items = Enum.GetValues(typeof(TItem))
-               .Cast<TItem>()
-               .ToDictionary(t => t, t => t.ToString() );
+        Items = Enum.GetValues(typeof(TEnum))
+               .Cast<TEnum>()
+               .ToDictionary(t => t, t => t.ToString()!);
         return base.OnInitializedAsync();
     }
 
