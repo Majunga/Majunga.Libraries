@@ -2,35 +2,23 @@
 
 @using System.Linq.Expressions
 
-<div class="custom-control custom-switch">
-    @if (string.IsNullOrWhiteSpace(OffLabel) == false)
-    {
-        <label class="custom-control-label" for="@Id">
-            @OffLabel
-        </label>
-    }
-
-    <InputCheckbox class="custom-control-input" id="@Id" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="AdditionalAttributes" />
+<div class="form-check form-switch">
+    <InputCheckbox class="form-check-input" id="@Id" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="AdditionalAttributes" />
     
-    @if (string.IsNullOrWhiteSpace(OffLabel) == false)
+    @if (string.IsNullOrWhiteSpace(Label) == false)
     {
-        <label class="custom-control-label" for="@Id">
-            @OnLabel
+        <label class="form-check-label" for="@Id">
+            @Label
         </label>
     }
 </div>
 @code {
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-    [Parameter] public string OffLabel { get; set; }
-    [Parameter] public string OnLabel { get; set; }
+    [Parameter] public string Label { get; set; }
     [Parameter] public string Id { get; set; }
 
     [Parameter] public bool Value { get; set; }
     [Parameter] public EventCallback<bool> ValueChanged { get; set; }
     [Parameter] public Expression<Func<bool>> ValueExpression { get; set; }
 
-    protected override Task OnInitializedAsync()
-    {
-        return base.OnInitializedAsync();
-    }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 }

@@ -1,20 +1,13 @@
 ﻿@namespace Majunga.Libraries.RazorComponents.Components.Forms
-
 @using System.Linq.Expressions
+
 <div class="form-group">
-    <InputText class="@Class" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="@AdditionalAttributes" />
+    <InputText class="form-control" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="@AdditionalAttributes" />
 </div>
 
 @code {
-    [Parameter] public string                   Class           { get; set; }
     [Parameter] public string                   Value           { get; set; }
     [Parameter] public EventCallback<string>    ValueChanged    { get; set; }
     [Parameter] public Expression<Func<string>> ValueExpression { get; set; }
     [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-
-    protected override Task OnInitializedAsync()
-    {
-        this.Class = string.IsNullOrWhiteSpace(this.Class) ? "form-control" : $"form-control {this.Class}";
-        return base.OnInitializedAsync();
-    }
 }
