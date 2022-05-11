@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	<VersionPrefix>6.0.8</VersionPrefix>
-    <PackageReleaseNotes>Update Packages</PackageReleaseNotes>
+    <PackageReleaseNotes>Added cards</PackageReleaseNotes>
 	<EnableDefaultContentItems>true</EnableDefaultContentItems>
 	<RazorCompileOnPublish>true</RazorCompileOnPublish>
   </PropertyGroup>
