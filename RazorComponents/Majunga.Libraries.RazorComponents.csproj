@@ -5,8 +5,8 @@
 	<Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<VersionPrefix>6.0.8</VersionPrefix>
-    <PackageReleaseNotes>Added cards</PackageReleaseNotes>
+	<VersionPrefix>6.0.9</VersionPrefix>
+    <PackageReleaseNotes>Input inheritance, rather than encapsulation</PackageReleaseNotes>
 	<EnableDefaultContentItems>true</EnableDefaultContentItems>
 	<RazorCompileOnPublish>true</RazorCompileOnPublish>
   </PropertyGroup>

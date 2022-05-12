@@ -1,0 +1,16 @@
+﻿@page "/editortext"
+@using Majunga.Libraries.RazorComponents.Components.Forms
+
+<EditForm Model="@model">
+    <EditorText @bind-Value="model.Text"/>
+</EditForm>
+@code {
+    private TestModel model = new TestModel();
+
+    class TestModel
+    {
+        public string Text { get; set; }
+    }
+}
+
+
