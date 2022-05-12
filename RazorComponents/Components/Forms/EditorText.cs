@@ -38,8 +38,4 @@ namespace Majunga.Libraries.RazorComponents.Components.Forms
             return true;
         }
     }
-
-//    <div class="form-group">
-//    <InputText class="form-control" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="@AdditionalAttributes" />
-//</div>
 }
