@@ -1,15 +1,28 @@
 ﻿@page "/editortext"
 @using Majunga.Libraries.RazorComponents.Components.Forms
+@using Majunga.Libraries.RazorComponents.Services
+@using System.ComponentModel.DataAnnotations
+@inject AlertState AlertState
 
-<EditForm Model="@model">
+<EditorForm Model="@model" OnValidSubmit="@HandleValidSubmit">
     <EditorText @bind-Value="model.Text"/>
-</EditForm>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditorForm>
+
 @code {
     private TestModel model = new TestModel();
 
-    class TestModel
+    private void HandleValidSubmit()
     {
-        public string Text { get; set; }
+        AlertState.Success($"Valid Input {model.Text}");
+    }
+
+    public class TestModel
+    {
+        [Required]
+        [MaxLength(10)]
+        public string? Text { get; set; }
     }
 }
 
