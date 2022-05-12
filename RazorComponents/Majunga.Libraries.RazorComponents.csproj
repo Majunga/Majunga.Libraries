@@ -5,8 +5,8 @@
 	<Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<VersionPrefix>6.0.7</VersionPrefix>
-    <PackageReleaseNotes>Added Text Alignment</PackageReleaseNotes>
+	<VersionPrefix>6.0.8</VersionPrefix>
+    <PackageReleaseNotes>Added cards</PackageReleaseNotes>
 	<EnableDefaultContentItems>true</EnableDefaultContentItems>
 	<RazorCompileOnPublish>true</RazorCompileOnPublish>
   </PropertyGroup>
@@ -16,9 +16,9 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Forms" Version="6.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Forms" Version="6.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.5" />
   </ItemGroup>
 
 </Project>

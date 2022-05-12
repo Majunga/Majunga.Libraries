@@ -1,0 +1,46 @@
+﻿@namespace Majunga.Libraries.RazorComponents.Components.Forms
+@typeparam TEnum
+
+@using System.Linq.Expressions
+<div class="form-group">
+    <InputSelect class="form-select" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="@AdditionalAttributes" >
+        @{
+            var i = 0;
+        }
+
+        @foreach (var item in Items!)
+        {
+            @if(i == 0 && string.IsNullOrWhiteSpace(DefaultValue) == false)
+            {
+                <option value="@item.Key" selected>@DefaultValue</option>
+            }
+            else
+            {
+               <option value="@item.Key">@item.Value</option>
+            }
+
+            i++;
+        }
+    </InputSelect>
+</div>
+
+@code {
+    private Dictionary<TEnum, string>? Items { get; set; }
+    [Parameter] public RenderFragment<TEnum>? OptionsTemplate { get; set; }
+
+    [Parameter] public string DefaultValue { get; set; } = "Please Select";
+
+    [Parameter] public TEnum?                   Value           { get; set; }
+    [Parameter] public EventCallback<TEnum?>    ValueChanged    { get; set; }
+    [Parameter] public Expression<Func<TEnum?>> ValueExpression { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        Items = Enum.GetValues(typeof(TEnum))
+               .Cast<TEnum>()
+               .ToDictionary(t => t, t => t.ToString()!);
+        return base.OnInitializedAsync();
+    }
+
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+}

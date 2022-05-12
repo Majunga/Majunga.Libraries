@@ -1,0 +1,29 @@
+﻿@namespace Majunga.Libraries.RazorComponents.Components.Forms
+@typeparam TItem
+@typeparam TSelected
+
+@using System.Linq.Expressions
+<div class="form-group">
+    <InputSelect class="form-select" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="@AdditionalAttributes" >
+        @foreach (var item in Items)
+        {
+            if (OptionsTemplate is not null)
+            {
+                @OptionsTemplate(item)
+            }
+        }
+    </InputSelect>
+</div>
+
+@code {
+    [Parameter] public List<TItem> Items { get; set; }
+    [Parameter] public RenderFragment<TItem>? OptionsTemplate { get; set; }
+
+    [Parameter] public string DefaultValue { get; set; } = "Please Select";
+
+    [Parameter] public TSelected                   Value           { get; set; }
+    [Parameter] public EventCallback<TSelected>    ValueChanged    { get; set; }
+    [Parameter] public Expression<Func<TSelected>> ValueExpression { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+}

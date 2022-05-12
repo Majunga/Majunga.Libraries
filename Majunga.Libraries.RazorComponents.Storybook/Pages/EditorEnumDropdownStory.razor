@@ -1,0 +1,46 @@
+﻿@page "/editorenumdropdown"
+
+@using Majunga.Libraries.RazorComponents.Components.Forms
+@using Majunga.Libraries.RazorComponents.Services
+@using System.ComponentModel.DataAnnotations
+
+@inject AlertState AlertState
+
+<EditorForm Model="@_model" OnValidSubmit="@HandleValidSubmitAsync">
+    <EditorEnumDropdown @bind-Value="_model.TestEnum" />
+    Selected value: @_model.TestEnum
+    <br />
+    <button class="btn btn-primary" type="submit">Submit</button>
+</EditorForm>
+
+
+@code {
+    private TestModel _model = new TestModel();
+
+    private async Task HandleValidSubmitAsync()
+    {
+        AlertState.Success($"Valid Enum {_model.TestEnum}");
+    }
+
+    internal class TestModel : IValidatableObject
+    {
+        [Required]
+        internal TestEnum TestEnum { get; set; }
+
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            if(TestEnum == TestEnum.Undefined)
+            {
+                yield return new ValidationResult("Please select a value", new [] {nameof(TestEnum)});
+            }
+        }
+    }
+
+    internal enum TestEnum
+    {
+        Undefined = 0,
+        One,
+        Two,
+        Three
+    }
+}

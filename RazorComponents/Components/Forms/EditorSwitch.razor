@@ -2,26 +2,23 @@
 
 @using System.Linq.Expressions
 
-<div class="custom-control custom-switch">
-    <InputCheckbox class="@Class" id="@Id" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="AdditionalAttributes" />
-    <label class="custom-control-label" for="@Id">
-        @Label
-    </label>
+<div class="form-check form-switch">
+    <InputCheckbox class="form-check-input" id="@Id" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="AdditionalAttributes" />
+    
+    @if (string.IsNullOrWhiteSpace(Label) == false)
+    {
+        <label class="form-check-label" for="@Id">
+            @Label
+        </label>
+    }
 </div>
 @code {
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
-    [Parameter] public string Id { get; set; }
-    [Parameter] public string Class { get; set; }
     [Parameter] public string Label { get; set; }
+    [Parameter] public string Id { get; set; }
 
     [Parameter] public bool Value { get; set; }
     [Parameter] public EventCallback<bool> ValueChanged { get; set; }
     [Parameter] public Expression<Func<bool>> ValueExpression { get; set; }
 
-    protected override Task OnInitializedAsync()
-    {
-        this.Class = string.Join(' ', "custom-control-input", this.Class);
-
-        return base.OnInitializedAsync();
-    }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 }

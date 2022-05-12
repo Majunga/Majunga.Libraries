@@ -1,0 +1,13 @@
+﻿@page "/editorswitch"
+@using Majunga.Libraries.RazorComponents.Components.Forms
+@using Majunga.Libraries.RazorComponents.Services
+@inject AlertState AlertState
+
+<EditorForm Model="@_toggle">
+    <EditorSwitch Id="test"  Label="@_toggle.ToString()" @bind-Value="_toggle" />
+</EditorForm>
+
+
+@code {
+    private bool _toggle = false;
+}

@@ -1,0 +1,38 @@
+﻿@page "/editordropdown"
+@using Majunga.Libraries.RazorComponents.Components.Forms
+@using Majunga.Libraries.RazorComponents.Services
+@inject AlertState AlertState
+
+<EditorForm Model="@_model">
+    <EditorDropdown Items="_model" Context="item" @bind-Value="Selected">
+        <OptionsTemplate>
+            <option value="@item.Id">@item.Value</option>
+        </OptionsTemplate>
+    </EditorDropdown>
+
+    Selected value: @Selected
+</EditorForm>
+
+
+@code {
+    private int Selected = 0;
+    private List<TestModel> _model = new List<TestModel>();
+
+    protected override Task OnInitializedAsync()
+    {
+        _model = new List<TestModel>
+        {
+            new TestModel { Id = 0, Value ="Please Select"},
+            new TestModel { Id = 1, Value ="One"},
+            new TestModel { Id = 2, Value ="Two"},
+            new TestModel { Id = 3, Value ="Three"}
+        };
+        return base.OnInitializedAsync();
+    }
+
+    class TestModel
+    {
+        public int Id { get; set; }
+        public string Value { get; set; }
+    }
+}
