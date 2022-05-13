@@ -15,4 +15,10 @@
     <ProjectReference Include="..\RazorComponents\Majunga.Libraries.RazorComponents.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\sample.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
