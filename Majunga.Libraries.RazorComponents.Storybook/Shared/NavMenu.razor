@@ -1,4 +1,5 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using System.Reflection
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Majunga.Libraries.RazorComponents.Storybook</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -14,21 +15,15 @@
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="editorswitch">
-                <span class="oi oi-plus" aria-hidden="true"></span> Editor Switch
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="editordropdown">
-                <span class="oi oi-plus" aria-hidden="true"></span> Editor Dropdown
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="editorenumdropdown">
-                <span class="oi oi-plus" aria-hidden="true"></span> Editor Enum Dropdown
-            </NavLink>
-        </div>
+
+        @foreach (var route in CreateNav())
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="@route.url">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> @route.name
+                </NavLink>
+            </div>
+        }
     </nav>
 </div>
 
@@ -40,5 +35,47 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    protected override void OnInitialized()
+    {
+        CreateNav();
+    }
+
+    private IEnumerable<(string name, string url, string? subname)> CreateNav()
+    {
+        var allComponents = Assembly
+                .GetExecutingAssembly()
+                .ExportedTypes
+                .Where(t => t.IsSubclassOf(typeof(ComponentBase)));
+
+        var routableComponents = allComponents
+            .Where(c => c
+                        .GetCustomAttributes(inherit: true)
+                        .OfType<RouteAttribute>()
+                        .Count() > 0).ToArray();
+
+        foreach (var routableComponent in routableComponents)
+        {
+
+            var route = routableComponent
+                            .ToString()
+                            // you need to adjust the following!
+                            .Replace("Majunga.Libraries.RazorComponents.Storybook.Pages.", string.Empty)
+                            .Replace(".", "/");
+
+            var routes = route.Split('/').ToArray();
+            var routeName = routes.Last();
+            if (routeName.ToLowerInvariant() == "index") continue;
+
+            if(routes.Length > 0)
+            {
+                yield return (routeName, route.ToLowerInvariant(), routes.First());
+            }
+            else
+            {
+                yield return (routeName, route.ToLowerInvariant(), null);
+            }
+        }
     }
 }

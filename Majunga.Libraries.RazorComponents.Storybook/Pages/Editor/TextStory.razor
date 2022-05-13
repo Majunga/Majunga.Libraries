@@ -1,0 +1,29 @@
+﻿@page "/editor/textstory"
+@using Majunga.Libraries.RazorComponents.Components.Forms
+@using Majunga.Libraries.RazorComponents.Services
+@using System.ComponentModel.DataAnnotations
+@inject AlertState AlertState
+
+<EditorForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+    <EditorText @bind-Value="model.Text"/>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditorForm>
+
+@code {
+    private TestModel model = new TestModel();
+
+    private void HandleValidSubmit()
+    {
+        AlertState.Success($"Valid Input {model.Text}");
+    }
+
+    public class TestModel
+    {
+        [Required]
+        [MaxLength(10)]
+        public string? Text { get; set; }
+    }
+}
+
+

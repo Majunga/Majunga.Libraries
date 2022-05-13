@@ -1,0 +1,13 @@
+﻿<iframe src="@src" title="@title" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen @attributes="@AdditionAttributes"></iframe>
+
+@code {
+    [Parameter]
+    public string src { get; set; } = string.Empty;
+
+    [Parameter]
+    public string title { get; set; } = string.Empty;
+
+    
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> AdditionAttributes { get; set; } = new Dictionary<string, object>();
+}
