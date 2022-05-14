@@ -23,13 +23,13 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore $projectPath
+      run: dotnet restore ${{ env.projectPath }}
       
     - name: Build
-      run: dotnet build $projectPath  --no-restore
+      run: dotnet build ${{ env.projectPath }}  --no-restore
       
     - name: Pack
-      run: dotnet pack $projectPath --runtime browser-wasm --output ./bin
+      run: dotnet pack ${{ env.projectPath }} --runtime browser-wasm --output ./bin
       
     - name: Push
       run: dotnet nuget push ./bin/**/*.nupkg -s https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET }}
