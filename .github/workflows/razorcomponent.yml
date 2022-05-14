@@ -24,17 +24,14 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore $projectPath
+      
     - name: Build
       run: dotnet build $projectPath  --no-restore
-    - name: Test
-      run: dotnet pack $projectPath --runtime browser-wasm
       
-    - name: Setup NuGet.exe for use with actions
-      # You may pin to the exact commit or the version.
-      # uses: NuGet/setup-nuget@b2bc17b761a1d88cab755a776c7922eb26eefbfa
-      uses: NuGet/setup-nuget@v1.0.6
-      with:
-        # NuGet API Key to configure.
-        nuget-api-key: ${{ secrets.NUGET }}
-        # Source to scope the NuGet API Key to.
-        nuget-api-key-source: https://api.nuget.org/v3/index.json
+    - name: Pack
+      run: dotnet pack $projectPath --runtime browser-wasm --output ./bin
+      
+    - name: Push
+      run: dotnet nuget push ./bin/**/*.nupkg -s https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET }}
+    
+        
