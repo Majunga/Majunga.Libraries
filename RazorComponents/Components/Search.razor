@@ -1,7 +1,7 @@
 ﻿@using System.Diagnostics.CodeAnalysis
 
-<input type="text" class="form-control" placeholder="Search by product name"
-       @bind-value="@SearchTerm" @bind-value:event="oninput" @onkeyup="SearchChanged" />
+<input type="text" class="form-control" 
+       @bind-value="@SearchTerm" @bind-value:event="oninput" @onkeyup="SearchChanged" @attributes="AdditionalAttributes"/>
 
 
 @code {
@@ -14,6 +14,9 @@
 
     [Parameter]
     public int? MilisecondTimer { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)] 
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     private void SearchChanged()
     {
