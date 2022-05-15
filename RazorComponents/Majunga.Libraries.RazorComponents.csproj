@@ -5,7 +5,6 @@
 	<Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<PackageId>RazorComponents</PackageId>
 	<VersionPrefix>6.0.10</VersionPrefix>
     <PackageReleaseNotes>Added Search component</PackageReleaseNotes>
 	<EnableDefaultContentItems>true</EnableDefaultContentItems>
