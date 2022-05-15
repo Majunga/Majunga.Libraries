@@ -20,6 +20,7 @@ variables:
     value: 'Any CPU'
   - name: buildConfiguration
     value: 'Release'
+  - group: nuget
 
 steps:
 - task: PowerShell@2
@@ -34,10 +35,7 @@ steps:
     ${{ else }}:
         script: 'dotnet pack $(projectPath) --version-suffix $(Build.SourceBranchName)$(Build.BuildId) --runtime browser-wasm --output $(Build.ArtifactStagingDirectory) /p:Configuration=Release --verbosity Detailed'
 
-- task: NuGetCommand@2
+- task: PowerShell@2
   inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: 'Majunga'
-    allowPackageConflicts: true
+    targetType: inline
+    script: 'dotnet nuget push $(Build.ArtifactStagingDirectory)/*.nupkg  -s https://api.nuget.org/v3/index.json --api-key ${{ nuget.apikey }} --skip-duplicate
