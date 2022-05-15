@@ -1,0 +1,56 @@
+﻿@page "/searchstory"
+@using Majunga.Libraries.RazorComponents.Components
+@using Majunga.Libraries.RazorComponents.Components.Forms
+@using Majunga.Libraries.RazorComponents.Services
+@using System.ComponentModel.DataAnnotations
+@inject AlertState AlertState
+
+
+    <Search OnSearchChanged="SearchChanged"/>
+
+    
+    Item Count = @Items.Count
+    Filterd Count = @FilteredItems.Count
+    <ul>
+        @foreach(var item in FilteredItems)
+        {
+            <li>@item.Text</li>
+        }
+    </ul>
+
+
+@code {
+    public List<TestModel> Items = new List<TestModel>
+    {
+        new TestModel { Text = Guid.NewGuid().ToString("N") },
+        new TestModel { Text = Guid.NewGuid().ToString("N") },
+        new TestModel { Text = Guid.NewGuid().ToString("N") },
+        new TestModel { Text = Guid.NewGuid().ToString("N") },
+        new TestModel { Text = Guid.NewGuid().ToString("N") },
+        new TestModel { Text = Guid.NewGuid().ToString("N") },
+        new TestModel { Text = Guid.NewGuid().ToString("N") }
+    };
+
+    public List<TestModel> FilteredItems = new List<TestModel>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        FilteredItems = Items;
+    }
+
+    public class TestModel
+    {
+        [Required]
+        [MaxLength(10)]
+        public string? Text { get; set; }
+    }
+
+    private void SearchChanged(string searchTerm)
+    {
+        Console.WriteLine(searchTerm);
+        FilteredItems = Items.Where(f => string.IsNullOrWhiteSpace(searchTerm) || string.IsNullOrWhiteSpace(searchTerm) == false && f.Text!.ToLowerInvariant().Contains(searchTerm.ToLowerInvariant())).ToList();
+    }
+}
+
+

@@ -5,9 +5,8 @@
 	<Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<PackageId>RazorComponents</PackageId>
-	<VersionPrefix>6.0.9</VersionPrefix>
-    <PackageReleaseNotes>Input inheritance, rather than encapsulation</PackageReleaseNotes>
+	<VersionPrefix>6.0.10</VersionPrefix>
+    <PackageReleaseNotes>Added Search component</PackageReleaseNotes>
 	<EnableDefaultContentItems>true</EnableDefaultContentItems>
 	<RazorCompileOnPublish>true</RazorCompileOnPublish>
   </PropertyGroup>
