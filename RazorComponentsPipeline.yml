@@ -43,4 +43,4 @@ steps:
     targetType: inline
     script: |
       $package = Get-ChildItem $(Build.ArtifactStagingDirectory)/*.nupkg
-      dotnet nuget push "$package.FullName"  -s https://api.nuget.org/v3/index.json --api-key $(apikey) --skip-duplicate
+      dotnet nuget push "$package"  -s https://api.nuget.org/v3/index.json --api-key $(apikey) --skip-duplicate
