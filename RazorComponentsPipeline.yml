@@ -38,4 +38,4 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: inline
-    script: 'dotnet nuget push $(Build.ArtifactStagingDirectory)/*.nupkg  -s https://api.nuget.org/v3/index.json --api-key $(nuget.apikey) --skip-duplicate'
+    script: 'dotnet nuget push $(Build.ArtifactStagingDirectory)/*.nupkg  -s https://api.nuget.org/v3/index.json --api-key ${{nuget.apikey}} --skip-duplicate'
