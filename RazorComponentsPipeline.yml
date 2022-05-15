@@ -24,10 +24,12 @@ variables:
 
 steps:
 - task: PowerShell@2
+  name: Build
   inputs:
     targetType: inline
     script: 'dotnet build $(projectPath) /p:Configuration=Release --verbosity Detailed'
 - task: PowerShell@2
+  name: Pack
   inputs:
     targetType: inline
     ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
@@ -36,6 +38,7 @@ steps:
         script: 'dotnet pack $(projectPath) --version-suffix $(Build.SourceBranchName)$(Build.BuildId) --runtime browser-wasm --output $(Build.ArtifactStagingDirectory) /p:Configuration=Release --verbosity Detailed'
 
 - task: PowerShell@2
+  name: Push
   inputs:
     targetType: inline
     script: 'dotnet nuget push $(Build.ArtifactStagingDirectory)/*.nupkg  -s https://api.nuget.org/v3/index.json --api-key $(apikey) --skip-duplicate'
