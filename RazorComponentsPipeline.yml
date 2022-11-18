@@ -8,7 +8,7 @@ trigger:
   paths:
     include:
       - "RazorComponentsPipeline.yml"
-      - "RazorComponents/*"
+      - "Majunga.Libraries/RazorComponents/*"
 
 pool:
   name: "Default"
