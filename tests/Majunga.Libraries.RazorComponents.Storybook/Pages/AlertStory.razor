@@ -1,0 +1,29 @@
+﻿@page "/alertstory"
+@using Majunga.Libraries.RazorComponents.Components
+@using Majunga.Libraries.RazorComponents.Components.Forms
+@using Majunga.Libraries.RazorComponents.Services
+@using System.ComponentModel.DataAnnotations
+@inject AlertState AlertState
+
+
+
+@code {
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSetAsync();
+
+        DisplayAlerts();
+    }
+
+    private void DisplayAlerts()
+    {
+        Task.Run(() =>
+        {
+            AlertState.Info("<h1>Info</h1>");
+            AlertState.Warning("<h2>Warning</h2>");
+            AlertState.Success("<h3>Success</h3>");
+            AlertState.Error("<h4>Error</h4>");
+        });
+    }
+}
+

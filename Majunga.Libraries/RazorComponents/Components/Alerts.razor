@@ -11,25 +11,25 @@
 @if (!string.IsNullOrWhiteSpace(AppState.ErrorMessage))
 {
     <div class="alert alert-danger" role="alert">
-        @AppState.ErrorMessage
+        @((MarkupString)AppState.ErrorMessage)
     </div>
 }
 @if (!string.IsNullOrWhiteSpace(AppState.WarningMessage))
 {
     <div class="alert alert-warning" role="alert">
-        @AppState.WarningMessage
+        @((MarkupString)AppState.WarningMessage)
     </div>
 }
 @if (!string.IsNullOrWhiteSpace(AppState.InfoMessage))
 {
     <div class="alert alert-info" role="alert">
-        @AppState.InfoMessage
+        @((MarkupString)AppState.InfoMessage)
     </div>
 }
 @if (!string.IsNullOrWhiteSpace(AppState.SuccessMessage))
 {
     <div class="alert alert-success" role="alert">
-        @AppState.SuccessMessage
+        @((MarkupString)AppState.SuccessMessage)
     </div>
 }
 
