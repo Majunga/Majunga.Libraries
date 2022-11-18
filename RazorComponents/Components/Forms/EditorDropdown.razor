@@ -16,14 +16,14 @@
 </div>
 
 @code {
-    [Parameter] public List<TItem> Items { get; set; }
+    [Parameter] public List<TItem> Items { get; set; } = new List<TItem>();
     [Parameter] public RenderFragment<TItem>? OptionsTemplate { get; set; }
 
     [Parameter] public string DefaultValue { get; set; } = "Please Select";
 
-    [Parameter] public TSelected                   Value           { get; set; }
-    [Parameter] public EventCallback<TSelected>    ValueChanged    { get; set; }
-    [Parameter] public Expression<Func<TSelected>> ValueExpression { get; set; }
+    [Parameter] public TSelected?                   Value           { get; set; }
+    [Parameter] public EventCallback<TSelected>     ValueChanged    { get; set; }
+    [Parameter] public Expression<Func<TSelected>>? ValueExpression { get; set; }
 
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
 }
