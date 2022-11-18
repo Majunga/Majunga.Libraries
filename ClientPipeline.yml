@@ -14,7 +14,7 @@ pool:
 
 variables:
   - name: projectPath
-    value: './Client/Majunga.Libraries.Client.csproj'
+    value: './Majunga.Libraries/Client/Majunga.Libraries.Client.csproj'
   - name: buildPlatform
     value: 'Any CPU'
   - name: buildConfiguration
