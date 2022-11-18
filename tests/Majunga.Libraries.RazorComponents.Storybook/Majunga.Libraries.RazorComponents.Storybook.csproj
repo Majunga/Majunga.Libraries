@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RazorComponents\Majunga.Libraries.RazorComponents.csproj" />
+    <ProjectReference Include="..\..\Majunga.Libraries\RazorComponents\Majunga.Libraries.RazorComponents.csproj" />
   </ItemGroup>
 
   <ItemGroup>

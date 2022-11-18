@@ -7,14 +7,14 @@ trigger:
   paths:
     include:
       - "ClientPipeline.yml"
-      - "Client/*"
+      - "Majunga.Libraries/Client/*"
       
 pool:
   name: "Default"
 
 variables:
   - name: projectPath
-    value: './Client/Majunga.Libraries.Client.csproj'
+    value: './Majunga.Libraries/Client/Majunga.Libraries.Client.csproj'
   - name: buildPlatform
     value: 'Any CPU'
   - name: buildConfiguration

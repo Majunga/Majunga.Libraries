@@ -8,14 +8,14 @@ trigger:
   paths:
     include:
       - "RazorComponentsPipeline.yml"
-      - "RazorComponents/*"
+      - "Majunga.Libraries/RazorComponents/*"
 
 pool:
   name: "Default"
 
 variables:
   - name: projectPath
-    value: './RazorComponents/Majunga.Libraries.RazorComponents.csproj'
+    value: './Majunga.Libraries/RazorComponents/Majunga.Libraries.RazorComponents.csproj'
   - name: buildPlatform
     value: 'Any CPU'
   - name: buildConfiguration
