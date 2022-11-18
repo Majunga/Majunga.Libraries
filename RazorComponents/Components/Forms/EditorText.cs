@@ -7,22 +7,32 @@ namespace Majunga.Libraries.RazorComponents.Components.Forms
 {
     public class EditorText : InputText
     {
-        /// <summary>
-        /// Gets or sets the associated <see cref="ElementReference"/>.
-        /// <para>
-        /// May be <see langword="null"/> if accessed before the component is rendered.
-        /// </para>
-        /// </summary>
-        [DisallowNull] public ElementReference? Element { get; protected set; }
+        [Parameter] public string? Label { get; set; }
+        [Parameter] public string? Id { get; set; }
+
+        [Parameter] public bool OverrideClass { get; set; }
 
         /// <inheritdoc />
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             builder.OpenElement(0, "div");
             builder.AddAttribute(2, "class", "form-group");
+
+            if (!string.IsNullOrEmpty(Label))
+            {
+                builder.OpenElement(3, "label");
+                if (!string.IsNullOrEmpty(Id))
+                    builder.AddAttribute(4, "for", Id);
+                builder.AddAttribute(5, "class", "form-label");
+                builder.AddContent(6, Label);
+                builder.CloseElement();
+            }
+
+            var inputClass = OverrideClass ? CssClass : string.Join(' ', CssClass, "form-control mb-3");
+
             builder.OpenElement(0, "input");
             builder.AddMultipleAttributes(1, AdditionalAttributes);
-            builder.AddAttribute(2, "class", string.Join(' ', CssClass, "form-control"));
+            builder.AddAttribute(2, "class", inputClass);
             builder.AddAttribute(3, "value", BindConverter.FormatValue(CurrentValue));
             builder.AddAttribute(4, "onchange", EventCallback.Factory.CreateBinder<string?>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
             builder.AddElementReferenceCapture(5, __inputReference => Element = __inputReference);
