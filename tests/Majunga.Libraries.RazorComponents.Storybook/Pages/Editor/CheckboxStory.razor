@@ -1,0 +1,44 @@
+﻿@page "/editor/checkboxstory"
+@using Majunga.Libraries.RazorComponents.Components.Forms
+@using Majunga.Libraries.RazorComponents.Services
+@using System.ComponentModel.DataAnnotations
+@inject AlertState AlertState
+
+<EditorForm Model="@model" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+    <EditorCheckbox @bind-Value="model.IsSomething" Label="Is editable"/>
+    <EditorCheckbox @bind-Value="model.IsReadonly" disabled  Label="Is Readonly"/>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditorForm>
+
+@code {
+    private TestModel model = new ();
+
+    protected override void OnInitialized()
+    {
+        model = new TestModel();
+        base.OnInitialized();
+    }
+
+    private void HandleValidSubmit()
+    {
+        AlertState.ClearAll();
+
+        AlertState.Success($"Submitted Input");
+    }
+    
+    private void HandleInvalidSubmit()
+    {
+        AlertState.ClearAll();
+
+        AlertState.Error($"Submitted Input");
+    }
+
+    public class TestModel
+    {
+        public bool IsSomething { get; set; }
+        public bool IsReadonly { get; set; }
+    }
+}
+
+
