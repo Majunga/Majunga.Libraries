@@ -2,7 +2,7 @@
 
 @typeparam TModel where TModel: class, new()
 
-<Popup @ref="PopupReference" OnHide="@OnHide" OnShow="@OnShowAsync">
+<Popup @ref="PopupReference" OnHide="@OnHide" OnShow="@OnShowAsync" Title="Title">
     <PopupBody>
         <EditorForm @ref="@EditorForm" Model="@Model" OnValidSubmit="@OnValidSubmit" OnInvalidSubmit="@OnInvalidSubmit">
             @ChildContent
@@ -21,6 +21,7 @@
     public EditorForm? EditorForm { get; set; }
 
     [Parameter] public TModel Model { get; set; } = new();
+    [Parameter] public string? Title { get; set; }
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 

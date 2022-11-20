@@ -10,7 +10,7 @@
 
 <button class="btn btn-primary" @onclick="() => _editorPopup.PopupReference!.Show()">Show Popup</button>
 
-<EditorPopup @ref="_editorPopup" Model="model" OnValidSubmit="@OnValidSubmit" OnInvalidSubmit="@OnInvalidSubmit">
+<EditorPopup Title="Popup title" @ref="_editorPopup" Model="model" OnValidSubmit="@OnValidSubmit" OnInvalidSubmit="@OnInvalidSubmit">
     <EditorText @bind-Value="model.Text" />
 </EditorPopup>
 
