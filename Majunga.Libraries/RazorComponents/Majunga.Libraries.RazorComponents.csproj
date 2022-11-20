@@ -5,8 +5,8 @@
 	<Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<VersionPrefix>6.1.0</VersionPrefix>
-    <PackageReleaseNotes>Fixed up a few things and reorganised JS and Popups</PackageReleaseNotes>
+	<VersionPrefix>6.1.1</VersionPrefix>
+    <PackageReleaseNotes>Added an Editor popup</PackageReleaseNotes>
 	<EnableDefaultContentItems>true</EnableDefaultContentItems>
 	<RazorCompileOnPublish>true</RazorCompileOnPublish>
   </PropertyGroup>

@@ -29,8 +29,8 @@
 
     [Parameter] public string Title { get; set; } = "Popup Window";
 
-    [Parameter] public EventCallback? OnHide { get; set; }
-    [Parameter] public EventCallback? OnShow { get; set; }
+    [Parameter] public EventCallback OnHide { get; set; }
+    [Parameter] public EventCallback OnShow { get; set; }
 
     public async Task Show()
     {
@@ -38,10 +38,7 @@
         _popupClass = "show";
         _showBackdrop = true;
 
-        if (this.OnShow != null)
-        {
-            await this.OnShow?.InvokeAsync(null);
-        }
+        await this.OnShow.InvokeAsync();
 
         StateHasChanged();
     }
@@ -52,10 +49,7 @@
         _popupClass = "";
         _showBackdrop = false;
 
-        if (this.OnHide != null)
-        {
-            await this.OnHide?.InvokeAsync(null);
-        }
+        await this.OnHide.InvokeAsync();
 
         StateHasChanged();
     }

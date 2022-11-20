@@ -1,0 +1,40 @@
+﻿@page "/editor/editorPopupStory"
+
+@using System.ComponentModel.DataAnnotations;
+@using Majunga.Libraries.RazorComponents.Components.Forms
+@using Majunga.Libraries.RazorComponents.Services;
+
+@inject AlertState AlertState
+
+<h3>EditorPopup</h3>
+
+<button class="btn btn-primary" @onclick="() => _editorPopup.PopupReference!.Show()">Show Popup</button>
+
+<EditorPopup @ref="_editorPopup" Model="model" OnValidSubmit="@OnValidSubmit" OnInvalidSubmit="@OnInvalidSubmit">
+    <EditorText @bind-Value="model.Text" />
+</EditorPopup>
+
+@code {
+    private EditorPopup<TestModel> _editorPopup;
+
+    private TestModel model = new();
+
+    public async Task OnValidSubmit()
+    {
+        AlertState.Success("Valid submit!");
+        await _editorPopup.PopupReference.Hide();
+    }
+
+    public async Task OnInvalidSubmit()
+    {
+        _editorPopup.EditorForm.Error("Invalid submit!");
+    }
+
+    
+    public class TestModel
+    {
+        [Required]
+        [MaxLength(10)]
+        public string? Text { get; set; }
+    }
+}

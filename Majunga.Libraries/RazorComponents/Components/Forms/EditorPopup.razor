@@ -1,0 +1,38 @@
+﻿@using Majunga.Libraries.RazorComponents.Components.Popup
+
+@typeparam TModel where TModel: class, new()
+
+<Popup @ref="PopupReference" OnHide="@OnHide" OnShow="@OnShowAsync">
+    <PopupBody>
+        <EditorForm @ref="@EditorForm" Model="@Model" OnValidSubmit="@OnValidSubmit" OnInvalidSubmit="@OnInvalidSubmit">
+            @ChildContent
+        </EditorForm>
+    </PopupBody>
+    <PopupFooter>
+        <div class="btn-group float-end">
+            <button class="btn btn-danger" @onclick="@(async ()=> await PopupReference!.Hide())">Cancel</button>
+            <button class="btn btn-primary" @onclick="@EditorForm!.Submit">Save</button>
+        </div>
+    </PopupFooter>
+</Popup>
+
+@code {
+    public Popup? PopupReference { get; set; }
+    public EditorForm? EditorForm { get; set; }
+
+    [Parameter] public TModel Model { get; set; } = new();
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+    [Parameter] public EventCallback OnInvalidSubmit { get; set; }
+
+    [Parameter] public EventCallback OnHide { get; set; }
+    [Parameter] public EventCallback OnShow { get; set; }
+
+    private async Task OnShowAsync()
+    {
+        EditorForm!.ClearAll();
+        await OnShow.InvokeAsync();
+    }
+}
