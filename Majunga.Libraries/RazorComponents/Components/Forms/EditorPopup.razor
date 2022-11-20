@@ -2,7 +2,7 @@
 
 @typeparam TModel where TModel: class, new()
 
-<Popup @ref="PopupReference" OnHide="@OnHide" OnShow="@OnShowAsync" Title="Title">
+<Popup @ref="PopupReference" OnHide="@OnHide" OnShow="@OnShowAsync" Title="@Title">
     <PopupBody>
         <EditorForm @ref="@EditorForm" Model="@Model" OnValidSubmit="@OnValidSubmit" OnInvalidSubmit="@OnInvalidSubmit">
             @ChildContent
