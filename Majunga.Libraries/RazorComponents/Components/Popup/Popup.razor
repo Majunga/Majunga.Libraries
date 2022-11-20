@@ -3,6 +3,12 @@
 <div class="modal @_popupClass" tabindex="-1" role="dialog" id="@Id" style="display:@_popupDisplay" aria-hidden="@(string.IsNullOrEmpty(_popupClass) ? true : false )">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
+            <div class="modal-header">
+                @Title
+                <button type="button" class="btn-close" aria-label="Close" @onclick="@Hide">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
             @ChildContent
         </div>
     </div>
@@ -19,7 +25,9 @@
     private bool _showBackdrop = false;
 
     [Parameter] public string Id { get; set; } = "PopupWindow";
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public string Title { get; set; } = "Popup Window";
 
     [Parameter] public EventCallback? OnHide { get; set; }
     [Parameter] public EventCallback? OnShow { get; set; }
@@ -30,7 +38,7 @@
         _popupClass = "show";
         _showBackdrop = true;
 
-        if(this.OnShow != null)
+        if (this.OnShow != null)
         {
             await this.OnShow?.InvokeAsync(null);
         }

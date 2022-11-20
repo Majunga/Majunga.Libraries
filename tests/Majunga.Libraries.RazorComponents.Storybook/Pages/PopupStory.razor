@@ -1,0 +1,57 @@
+﻿@page "/popupstory"
+
+@using Majunga.Libraries.RazorComponents.Components.Forms
+@using Majunga.Libraries.RazorComponents.Components.Popup
+@using System.ComponentModel.DataAnnotations;
+@using Majunga.Libraries.RazorComponents.Services;
+
+@inject AlertState AlertState
+
+<h3>PopupStory</h3>
+
+<button class="btn btn-primary" @onclick="() => _popup!.Show()">Show Popup</button>
+
+<Popup @ref="_popup">
+    <PopupBody>
+        <EditorForm @ref="_editorForm" Model="_model" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+            <EditorText @bind-Value="_model.Text" />
+
+        </EditorForm>
+    </PopupBody>
+    <PopupFooter>
+        <div class="btn-group float-right">
+            <button type="submit" class="btn btn-success" @onclick="_editorForm!.Submit">Save</button>
+            <button type="button" class="btn btn-danger" @onclick="_popup!.Hide">Cancel</button>
+        </div>
+    </PopupFooter>
+</Popup>
+
+@code {
+    private Popup? _popup;
+    private EditorForm? _editorForm;
+
+    private TestModel _model = new TestModel { Text = "Hello World" };
+
+    private async Task HandleValidSubmit()
+    {
+        AlertState.ClearAll();
+
+        AlertState.Success($"Submitted Input {_model.Text}");
+
+        await _popup!.Hide();
+    }
+    
+    private void HandleInvalidSubmit()
+    {
+        AlertState.ClearAll();
+
+        _editorForm!.Error($"Submitted Input {_model.Text}");
+    }
+
+    public class TestModel
+    {
+        [Required]
+        [MaxLength(10)]
+        public string? Text { get; set; }
+    }
+}

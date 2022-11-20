@@ -5,8 +5,8 @@
 	<Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<VersionPrefix>6.0.13</VersionPrefix>
-    <PackageReleaseNotes>Added Search component</PackageReleaseNotes>
+	<VersionPrefix>6.1.0</VersionPrefix>
+    <PackageReleaseNotes>Fixed up a few things and reorganised JS and Popups</PackageReleaseNotes>
 	<EnableDefaultContentItems>true</EnableDefaultContentItems>
 	<RazorCompileOnPublish>true</RazorCompileOnPublish>
   </PropertyGroup>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="wwwroot\js\AudioPlayer.js">
+    <Content Update="wwwroot\js\RazorComponents.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

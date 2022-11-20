@@ -1,14 +1,44 @@
 ﻿@namespace Majunga.Libraries.RazorComponents.Components.Forms
 
 @using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.JSInterop;
 
-<EditForm EditContext="@EditContext" OnSubmit="@OnSubmit" OnInvalidSubmit="@OnInvalidSubmit" OnValidSubmit="@OnValidSubmit" role="form" @attributes="AdditionalAttributes">
+@inject IJSRuntime IJSRuntime
+
+<EditForm id="@Id" EditContext="@EditContext" OnSubmit="@OnSubmit" OnInvalidSubmit="@OnInvalidSubmit" OnValidSubmit="@OnValidSubmit" role="form" @attributes="AdditionalAttributes">
+    @if (!string.IsNullOrWhiteSpace(ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            @((MarkupString)ErrorMessage)
+        </div>
+    }
+    @if (!string.IsNullOrWhiteSpace(WarningMessage))
+    {
+        <div class="alert alert-warning" role="alert">
+            @((MarkupString)WarningMessage)
+        </div>
+    }
+    @if (!string.IsNullOrWhiteSpace(InfoMessage))
+    {
+        <div class="alert alert-info" role="alert">
+            @((MarkupString)InfoMessage)
+        </div>
+    }
+    @if (!string.IsNullOrWhiteSpace(SuccessMessage))
+    {
+        <div class="alert alert-success" role="alert">
+            @((MarkupString)SuccessMessage)
+        </div>
+    }
+    
     <DataAnnotationsValidator />
     <ValidationSummary />
     @ChildContent
 </EditForm>
 
 @code {
+    [Parameter] public string Id { get; set; } = Guid.NewGuid().ToString("N");
+
     [Parameter] public RenderFragment? ChildContent { get; set; }
     [Parameter] public EditContext? EditContext { get; set; }
     [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
@@ -27,4 +57,49 @@
         base.OnInitialized();
     }
 
+    public async Task Submit()
+    {
+        // Work around, as you can't directly submit a EditForm without a button in it's scope
+        await IJSRuntime.InvokeVoidAsync("submitForm", Id);
+    }
+
+    public string? InfoMessage { get; private set; }
+    public string? WarningMessage { get; private set; }
+    public string? ErrorMessage { get; private set; }
+    public string? SuccessMessage { get; private set; }
+
+
+    public void ClearAll()
+    {
+        InfoMessage = string.Empty;
+        WarningMessage = string.Empty;
+        ErrorMessage = string.Empty;
+        SuccessMessage = string.Empty;
+
+        StateHasChanged();
+    }
+
+    public void Info(string message)
+    {
+        InfoMessage = message;
+        StateHasChanged();
+    }
+
+    public void Warning(string message)
+    {
+        WarningMessage = message;
+        StateHasChanged();
+    }
+
+    public void Error(string message)
+    {
+        ErrorMessage = message;
+        StateHasChanged();
+    }
+
+    public void Success(string message)
+    {
+        SuccessMessage = message;
+        StateHasChanged();
+    }
 }
