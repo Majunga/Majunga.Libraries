@@ -37,21 +37,21 @@
 </EditForm>
 
 @code {
-    [Parameter] public string Id { get; set; } = Guid.NewGuid().ToString("N");
+        [Parameter] public string Id { get; set; } = Guid.NewGuid().ToString("N");
 
-    [Parameter] public RenderFragment? ChildContent { get; set; }
-    [Parameter] public EditContext? EditContext { get; set; }
-    [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
-    [Parameter] public EventCallback<EditContext> OnSubmit { get; set; }
-    [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
-    [Parameter] public @Object? Model { get; set; }
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+        [Parameter] public RenderFragment? ChildContent { get; set; }
+        [Parameter] public EditContext? EditContext { get; set; }
+        [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
+        [Parameter] public EventCallback<EditContext> OnSubmit { get; set; }
+        [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
+        [Parameter] public @Object? Model { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
 
     protected override void OnInitialized()
     {
         if (EditContext == null)
         {
-            EditContext = new EditContext(Model);
+            SetEditorContext(Model);
         }
 
         base.OnInitialized();
@@ -61,6 +61,12 @@
     {
         // Work around, as you can't directly submit a EditForm without a button in it's scope
         await IJSRuntime.InvokeVoidAsync("submitForm", Id);
+    }
+
+    public void SetEditorContext(@Object? model)
+    {
+        if (model == null) return;
+        EditContext = new EditContext(model);
     }
 
     public string? InfoMessage { get; private set; }
