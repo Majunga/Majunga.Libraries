@@ -86,16 +86,10 @@ namespace Majunga.Libraries.RazorComponents.Components.Grid
             var property = modelType.GetProperty(column.Field);
             var value = property?.GetValue(model) ?? null;
 
-            if (string.IsNullOrWhiteSpace(column.DisplayFormat) == false)
+            if (string.IsNullOrWhiteSpace(column.DisplayFormat) == false && value != null)
             {
-                if (property?.PropertyType == typeof(DateTime) || property?.PropertyType == typeof(DateTime?))
-                {
-                    var dateTimeValue = ((DateTime?)value);
-                    if (dateTimeValue.HasValue)
-                        return dateTimeValue.Value.ToString(column.DisplayFormat) ?? string.Empty;
-                }
-
-                return string.Format(column.DisplayFormat, value);
+                var convertedValue = Convert.ChangeType(value, property!.PropertyType);
+                return string.Format(column.DisplayFormat, convertedValue);
             }
 
             return value?.ToString() ?? string.Empty;

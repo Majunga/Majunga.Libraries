@@ -5,9 +5,9 @@
 
 <Grid TModelItem="WeatherForecast" Data="@forecasts">
     <Columns>
-        <GridColumn Title="Date"         Field="@nameof(WeatherForecast.Date)"         DisplayFormat="dd MMM yyyy"/>
-        <GridColumn Title="TemperatureC" Field="@nameof(WeatherForecast.TemperatureC)" DisplayFormat="{0}°C" />
-        <GridColumn Title="TemperatureF" Field="@nameof(WeatherForecast.TemperatureF)" DisplayFormat="{0}°F" />
+        <GridColumn Title="Date"         Field="@nameof(WeatherForecast.Date)"         DisplayFormat="{0:dd MMM yyyy}"/>
+        <GridColumn Title="TemperatureC" Field="@nameof(WeatherForecast.TemperatureC)" DisplayFormat="{0:N0}°C" />
+        <GridColumn Title="TemperatureF" Field="@nameof(WeatherForecast.TemperatureF)" DisplayFormat="{0:N2}°F" />
         <GridColumn Title="Summary"      Field="@nameof(WeatherForecast.Summary)" />
     </Columns>
 </Grid>
@@ -23,7 +23,6 @@
         await base.OnInitializedAsync();
     }
 
-
     public class WeatherForecast
     {
         public DateTime Date { get; set; }
@@ -32,6 +31,6 @@
 
         public string? Summary { get; set; }
 
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        public double TemperatureF => 32 + (TemperatureC / 0.5556);
     }
 }
