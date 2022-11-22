@@ -5,6 +5,7 @@
 
 <Grid TModelItem="WeatherForecast" Data="@forecasts">
     <Columns>
+        <GridColumn Title="Id"         Field="@nameof(WeatherForecast.Id)"     Hidden />
         <GridColumn Title="Date"         Field="@nameof(WeatherForecast.Date)"         DisplayFormat="{0:dd MMM yyyy}"/>
         <GridColumn Title="TemperatureC" Field="@nameof(WeatherForecast.TemperatureC)" DisplayFormat="{0:N0}°C" />
         <GridColumn Title="TemperatureF" Field="@nameof(WeatherForecast.TemperatureF)" DisplayFormat="{0:N2}°F" />
@@ -25,6 +26,7 @@
 
     public class WeatherForecast
     {
+        public string Id { get; set; }
         public DateTime Date { get; set; }
 
         public int TemperatureC { get; set; }

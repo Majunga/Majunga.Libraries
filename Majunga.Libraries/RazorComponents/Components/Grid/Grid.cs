@@ -33,7 +33,7 @@ namespace Majunga.Libraries.RazorComponents.Components.Grid
             builder.OpenElement(seq++, "thead");
             builder.OpenElement(seq++, "tr");
 
-            foreach (var column in InitialisedColumns)
+            foreach (var column in InitialisedColumns.Where(c => c.Hidden == false))
             {
                 builder.OpenElement(seq++, "th");
                 builder.AddContent(seq++, column.Title);
@@ -50,7 +50,7 @@ namespace Majunga.Libraries.RazorComponents.Components.Grid
                 {
                     builder.OpenElement(seq++, "tr");
 
-                    foreach (var column in InitialisedColumns)
+                    foreach (var column in InitialisedColumns.Where(c => c.Hidden == false))
                     {
                         builder.OpenElement(seq++, "td");
                         builder.AddContent(seq++, GetValue(row, column));

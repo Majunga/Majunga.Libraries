@@ -16,6 +16,9 @@ namespace Majunga.Libraries.RazorComponents.Components.Grid
         [Parameter]
         public string? DisplayFormat { get; set; }
 
+        [Parameter]
+        public bool Hidden { get; set; }
+
         protected override Task OnInitializedAsync()
         {
             Container?.AddColumn(this);
@@ -27,5 +30,6 @@ namespace Majunga.Libraries.RazorComponents.Components.Grid
         string? Title { get; set; }
         string? Field { get; set; }
         string? DisplayFormat { get; set; }
+        bool Hidden { get; set; }
     }
 }
