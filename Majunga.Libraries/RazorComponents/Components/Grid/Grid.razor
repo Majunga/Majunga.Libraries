@@ -1,0 +1,84 @@
+﻿@typeparam TModelItem
+@implements IGrid
+
+<div>
+    <table class="table">
+        <caption class="caption-top">
+            @GridToolbarTop
+        </caption>
+        <caption class="caption-bottom">
+            @GridToolbarBottom
+        </caption>
+        <thead>
+            <tr>
+                @foreach (var column in InitialisedColumns.Where(c => c.Hidden == false))
+                {
+                    <th>
+                        @column.Title
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @if (InitialisedColumns.Count > 0 && Data != null && Data.Any())
+            {
+                @foreach (var row in Data)
+                {
+                    <tr>
+                        @foreach (var column in InitialisedColumns.Where(c => c.Hidden == false))
+                        {
+                            <td>
+                                @GetValue(row, column)
+
+                                @column.ChildContent
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<CascadingValue IsFixed="true" Value="@this" ChildContent="@Columns" />
+
+
+@code {
+    private List<IColumn> InitialisedColumns { get; set; } = new List<IColumn>();
+
+    [Parameter]
+    public IEnumerable<TModelItem>? Data { get; set; }
+
+    [Parameter]
+    public RenderFragment? GridToolbarTop { get; set; }
+    [Parameter]
+
+    public RenderFragment? GridToolbarBottom { get; set; }
+
+    [Parameter]
+    public RenderFragment? Columns { get; set; }
+
+    public void AddColumn(IColumn gridColumn)
+    {
+        if (InitialisedColumns.Any(c => c.Field == gridColumn.Field))
+            return;
+
+        InitialisedColumns.Add(gridColumn);
+    }
+
+    private string? GetValue(TModelItem model, IColumn column)
+    {
+        if (string.IsNullOrWhiteSpace(column.Field)) return string.Empty;
+        var modelType = model!.GetType();
+        var property = modelType.GetProperty(column.Field);
+        var value = property?.GetValue(model) ?? null;
+
+        if (string.IsNullOrWhiteSpace(column.DisplayFormat) == false && value != null)
+        {
+            var convertedValue = Convert.ChangeType(value, property!.PropertyType);
+            return string.Format(column.DisplayFormat, convertedValue);
+        }
+
+        return value?.ToString() ?? string.Empty;
+    }
+}

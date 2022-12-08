@@ -1,0 +1,33 @@
+﻿@implements IColumn
+
+@ChildContent
+
+@code {
+    [CascadingParameter]
+    public IGrid? Container { get; set; }
+    
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string? Title { get; set; }
+
+    [Parameter]
+    public string? Field { get; set; }
+
+    [Parameter]
+    public string? DisplayFormat { get; set; }
+
+    [Parameter]
+    public bool Hidden { get; set; }
+
+    [Parameter]
+    public bool IsKey { get; set; }
+
+
+    protected override Task OnInitializedAsync()
+    {
+        Container?.AddColumn(this);
+        return base.OnInitializedAsync();
+    }
+}

@@ -28,6 +28,7 @@ steps:
   inputs:
     targetType: inline
     script: 'dotnet build $(projectPath) /p:Configuration=Release --verbosity Detailed'
+    
 - task: PowerShell@2
   name: Pack
   inputs:

@@ -1,0 +1,33 @@
+﻿@using System.Collections.Generic
+@using System.Reflection
+
+@inherits Microsoft.AspNetCore.Components.ComponentBase
+
+@typeparam TModel
+
+<table>
+    <thead>
+        <tr>
+            @foreach (var prop in typeof(TModel).GetProperties())
+            {
+                <th>@prop.Name</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @foreach (var prop in typeof(TModel).GetProperties())
+                {
+                    <td>@prop.GetValue(item)</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public List<TModel> Model { get; set; }
+}
