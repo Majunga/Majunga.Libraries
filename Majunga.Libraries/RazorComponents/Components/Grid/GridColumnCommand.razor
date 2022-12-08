@@ -1,0 +1,21 @@
+﻿@typeparam TModelItem
+@implements ICommandColumn<TModelItem>
+
+@ChildContent
+
+@code {
+    [CascadingParameter]
+    public IGrid? Container { get; set; }
+
+    [Parameter]
+    public RenderFragment<TModelItem>? ChildContent { get; set; }
+
+    [Parameter]
+    public string? Title { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        Container?.AddColumn(this);
+        return base.OnInitializedAsync();
+    }
+}

@@ -1,7 +1,7 @@
 ﻿namespace Majunga.Libraries.RazorComponents.Components.Grid
 {
-    public interface IGrid<TModelItem>
+    public interface IGrid
     {
-        void AddColumn(IColumn<TModelItem> gridColumn);
+        void AddColumn(IColumn gridColumn);
     }
 }

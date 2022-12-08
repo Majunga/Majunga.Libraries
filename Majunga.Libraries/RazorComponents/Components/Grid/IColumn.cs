@@ -2,13 +2,22 @@
 
 namespace Majunga.Libraries.RazorComponents.Components.Grid
 {
-    public interface IColumn<TModelItem>
+    public interface IDataColumn : IColumn
     {
-        string? Title { get; set; }
         string? Field { get; set; }
         string? DisplayFormat { get; set; }
         bool Hidden { get; set; }
         bool IsKey { get; set; }
-        RenderFragment<TModelItem>? ChildContent { get; set; } 
+        RenderFragment? ChildContent { get; set; }
+    }
+
+    public interface ICommandColumn<TModelItem> : IColumn
+    {
+        RenderFragment<TModelItem>? ChildContent { get; set; }
+    }
+
+    public interface IColumn
+    {
+        string? Title { get; set; }
     }
 }

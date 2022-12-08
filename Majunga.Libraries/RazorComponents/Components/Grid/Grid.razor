@@ -1,5 +1,5 @@
 ﻿@typeparam TModelItem
-@implements IGrid<TModelItem>
+@implements IGrid
 
 <div>
     <table class="table">
@@ -11,7 +11,7 @@
         </caption>
         <thead>
             <tr>
-                @foreach (var column in InitialisedColumns.Where(c => c.Hidden == false))
+                @foreach (var column in InitialisedColumns.Where(c => c is not IDataColumn || (c is IDataColumn && ((IDataColumn)c).Hidden == false)))
                 {
                     <th>
                         @column.Title
@@ -25,12 +25,23 @@
                 @foreach (var row in Data)
                 {
                     <tr>
-                        @foreach (var column in InitialisedColumns.Where(c => c.Hidden == false))
+                        @foreach (var column in InitialisedColumns.Where(c => c is not IDataColumn || (c is IDataColumn && ((IDataColumn)c).Hidden == false)))
                         {
                             <td>
-                                @GetValue(row, column)
+                                @if (column is IDataColumn)
+                                {
+                                    var dataColumn = (IDataColumn)column;
+                                    @GetValue(row, dataColumn)
 
-                                @column.ChildContent?.Invoke(row)
+                                    @dataColumn.ChildContent
+                                }
+
+                                @if(column is ICommandColumn<TModelItem>)
+                                {
+                                    var commandColumn = (ICommandColumn<TModelItem>)column;
+
+                                    @commandColumn.ChildContent?.Invoke(row)
+                                }
                             </td>
                         }
                     </tr>
@@ -45,7 +56,7 @@
 </div>
 
 @code {
-    private List<IColumn<TModelItem>> InitialisedColumns { get; set; } = new List<IColumn<TModelItem>>();
+    private List<IColumn> InitialisedColumns { get; set; } = new List<IColumn>();
 
     [Parameter]
     public IEnumerable<TModelItem>? Data { get; set; }
@@ -59,15 +70,15 @@
     [Parameter]
     public RenderFragment? Columns { get; set; }
 
-    public void AddColumn(IColumn<TModelItem> gridColumn)
+    public void AddColumn(IColumn gridColumn)
     {
-        if (InitialisedColumns.Any(c => c.Field == gridColumn.Field))
+        if (InitialisedColumns.Any(c => c.Title == gridColumn.Title))
             return;
 
         InitialisedColumns.Add(gridColumn);
     }
 
-    private string? GetValue(TModelItem model, IColumn<TModelItem> column)
+    private string? GetValue(TModelItem model, IDataColumn column)
     {
         if (string.IsNullOrWhiteSpace(column.Field)) return string.Empty;
         var modelType = model!.GetType();
