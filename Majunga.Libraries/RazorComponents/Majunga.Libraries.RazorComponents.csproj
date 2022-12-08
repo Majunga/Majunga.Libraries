@@ -5,8 +5,8 @@
 	<Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<VersionPrefix>6.1.4</VersionPrefix>
-    <PackageReleaseNotes>Added a set method for the editor context</PackageReleaseNotes>
+	<VersionPrefix>6.1.5</VersionPrefix>
+    <PackageReleaseNotes>Added Grids!</PackageReleaseNotes>
 	<EnableDefaultContentItems>true</EnableDefaultContentItems>
 	<RazorCompileOnPublish>true</RazorCompileOnPublish>
   </PropertyGroup>
