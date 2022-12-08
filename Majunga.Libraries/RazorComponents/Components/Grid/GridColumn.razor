@@ -1,13 +1,14 @@
-﻿@implements IColumn
+﻿@typeparam TModelItem
+@implements IColumn<TModelItem>
 
 @ChildContent
 
 @code {
     [CascadingParameter]
-    public IGrid? Container { get; set; }
+    public IGrid<TModelItem>? Container { get; set; }
     
     [Parameter]
-    public RenderFragment? ChildContent { get; set; }
+    public RenderFragment<TModelItem>? ChildContent { get; set; }
 
     [Parameter]
     public string? Title { get; set; }

@@ -1,5 +1,5 @@
 ﻿@typeparam TModelItem
-@implements IGrid
+@implements IGrid<TModelItem>
 
 <div>
     <table class="table">
@@ -30,7 +30,7 @@
                             <td>
                                 @GetValue(row, column)
 
-                                @column.ChildContent
+                                @column.ChildContent?.Invoke(row)
                             </td>
                         }
                     </tr>
@@ -40,11 +40,12 @@
     </table>
 </div>
 
-<CascadingValue IsFixed="true" Value="@this" ChildContent="@Columns" />
-
+<div style="display:none">
+    <CascadingValue IsFixed="true" Value="@this" ChildContent="@Columns"  />
+</div>
 
 @code {
-    private List<IColumn> InitialisedColumns { get; set; } = new List<IColumn>();
+    private List<IColumn<TModelItem>> InitialisedColumns { get; set; } = new List<IColumn<TModelItem>>();
 
     [Parameter]
     public IEnumerable<TModelItem>? Data { get; set; }
@@ -58,7 +59,7 @@
     [Parameter]
     public RenderFragment? Columns { get; set; }
 
-    public void AddColumn(IColumn gridColumn)
+    public void AddColumn(IColumn<TModelItem> gridColumn)
     {
         if (InitialisedColumns.Any(c => c.Field == gridColumn.Field))
             return;
@@ -66,7 +67,7 @@
         InitialisedColumns.Add(gridColumn);
     }
 
-    private string? GetValue(TModelItem model, IColumn column)
+    private string? GetValue(TModelItem model, IColumn<TModelItem> column)
     {
         if (string.IsNullOrWhiteSpace(column.Field)) return string.Empty;
         var modelType = model!.GetType();
