@@ -5,8 +5,8 @@
 	<Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<VersionPrefix>7.0.0</VersionPrefix>
-    <PackageReleaseNotes>Updated to dotnet 7</PackageReleaseNotes>
+	<VersionPrefix>7.0.1</VersionPrefix>
+    <PackageReleaseNotes>Fixed Editor Popup submit button, not having type="submit"</PackageReleaseNotes>
 	<EnableDefaultContentItems>true</EnableDefaultContentItems>
 	<RazorCompileOnPublish>true</RazorCompileOnPublish>
   </PropertyGroup>
