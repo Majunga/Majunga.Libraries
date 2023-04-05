@@ -5,7 +5,7 @@
 
 @inject IJSRuntime IJSRuntime
 
-<EditForm id="@Id" EditContext="@EditContext" OnSubmit="@OnSubmit" OnInvalidSubmit="@OnInvalidSubmit" OnValidSubmit="@OnValidSubmit" role="form" @attributes="AdditionalAttributes">
+<EditForm @ref="_editForm" id="@Id" EditContext="@EditContext" OnSubmit="@OnSubmit" OnInvalidSubmit="@OnInvalidSubmit" OnValidSubmit="@OnValidSubmit" role="form" @attributes="AdditionalAttributes">
     @if (!string.IsNullOrWhiteSpace(ErrorMessage))
     {
         <div class="alert alert-danger" role="alert">
@@ -30,22 +30,24 @@
             @((MarkupString)SuccessMessage)
         </div>
     }
-    
+
     <DataAnnotationsValidator />
     <ValidationSummary />
     @ChildContent
 </EditForm>
 
 @code {
-        [Parameter] public string Id { get; set; } = Guid.NewGuid().ToString("N");
+    private EditForm? _editForm;
 
-        [Parameter] public RenderFragment? ChildContent { get; set; }
-        [Parameter] public EditContext? EditContext { get; set; }
-        [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
-        [Parameter] public EventCallback<EditContext> OnSubmit { get; set; }
-        [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
-        [Parameter] public @Object? Model { get; set; }
-        [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+    [Parameter] public string Id { get; set; } = Guid.NewGuid().ToString("N");
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public EditContext? EditContext { get; set; }
+    [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
+    [Parameter] public EventCallback<EditContext> OnSubmit { get; set; }
+    [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
+    [Parameter] public @Object? Model { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
 
     protected override void OnInitialized()
     {
