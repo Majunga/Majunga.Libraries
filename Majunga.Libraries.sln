@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{F8831353-3F91-489D-AA1E-C7965294E230}"
 	ProjectSection(SolutionItems) = preProject
 		ClientPipeline.yml = ClientPipeline.yml
+		InfrastruturePipeline.yml = InfrastruturePipeline.yml
 		RazorComponentsPipeline.yml = RazorComponentsPipeline.yml
 	EndProjectSection
 EndProject
