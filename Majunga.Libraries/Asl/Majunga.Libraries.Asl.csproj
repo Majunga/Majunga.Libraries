@@ -2,8 +2,8 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
-		<VersionPrefix>1.0.1</VersionPrefix>
-		<PackageReleaseNotes>Added Composition root</PackageReleaseNotes>
+		<VersionPrefix>1.0.2</VersionPrefix>
+		<PackageReleaseNotes>Update building of the project</PackageReleaseNotes>
 		<RepositoryUrl>https://github.com/Majunga/Majunga.Libraries</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
