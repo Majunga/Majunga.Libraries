@@ -5,8 +5,8 @@
 	<Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<VersionPrefix>7.0.2</VersionPrefix>
-    <PackageReleaseNotes>Undid the last change, and added the EditContext to the submit EventCallbacks</PackageReleaseNotes>
+	<VersionPrefix>7.0.3</VersionPrefix>
+    <PackageReleaseNotes>Added Confirmation Popup</PackageReleaseNotes>
 	<EnableDefaultContentItems>true</EnableDefaultContentItems>
 	<RazorCompileOnPublish>true</RazorCompileOnPublish>
   </PropertyGroup>

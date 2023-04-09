@@ -1,0 +1,57 @@
+﻿<Popup @ref="_popup" OnHide="@OnHide" Title="@Title">
+    <PopupBody>@Message</PopupBody>
+    <PopupFooter>
+        <button type="button" class="btn btn-primary" @onclick="@ConfirmPopUp">Yes</button>
+        <button type="button" class="btn btn-secondary" @onclick="@CancelPopUp">No</button>
+    </PopupFooter>
+</Popup>
+
+@code {
+    private Popup? _popup;
+
+    [Parameter]
+    public string Title { get; set; } = "Confirm";
+
+    [Parameter]
+    public string? Message { get; set; } = "Are you sure?";
+
+
+    [Parameter] public EventCallback OnHide { get; set; }
+
+    private Func<Task>? _onConfirmation { get; set; }
+    private Func<Task>? _onCancel { get; set; }
+
+    public async Task Show(Func<Task> onConfirmation, Func<Task>? onCancel = null, string message = "Are you sure?")
+    {
+        _onConfirmation = onConfirmation;
+        _onCancel = onCancel;
+        Message = message;
+
+        await this._popup!.Show();
+    }
+
+    public async Task ConfirmPopUp()
+    {
+        if (_onConfirmation != null)
+        {
+            await _onConfirmation();
+        }
+
+        Close();
+    }
+    
+    public async Task CancelPopUp()
+    {
+        if (_onCancel != null)
+        {
+            await _onCancel();
+        }
+
+        Close();
+    }
+
+    public void Close()
+    {
+        _popup?.Hide();
+    }
+}

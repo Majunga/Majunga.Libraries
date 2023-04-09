@@ -1,0 +1,29 @@
+﻿@page "/confirmStory"
+
+@using Majunga.Libraries.RazorComponents.Components.Popup
+@using Majunga.Libraries.RazorComponents.Services;
+<h3>ConfirmStory</h3>
+
+@inject AlertState AlertState
+<button class="btn btn-primary" @onclick='() => _confirm!.Show(OnYes, OnNo, "Are you super sure?")'>Open Confirmation</button>
+<Confirm @ref="_confirm" OnHide="@OnHide" Title="Confirmation Title" />
+@code {
+    private Confirm? _confirm;
+
+    private async Task OnHide()
+    {
+        AlertState.Info("Confirmation closed");
+    }
+
+    private async Task OnYes()
+    {
+        AlertState.ClearAll();
+        AlertState.Success("You said yes");
+    }
+
+    private async Task OnNo()
+    {
+        AlertState.ClearAll();
+        AlertState.Warning("You said no");
+    }
+}
