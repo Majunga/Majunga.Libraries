@@ -6,9 +6,11 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{F8831353-3F91-489D-AA1E-C7965294E230}"
 	ProjectSection(SolutionItems) = preProject
 		AslPipeline.yml = AslPipeline.yml
+		AuthPipeline.yml = AuthPipeline.yml
 		ClientPipeline.yml = ClientPipeline.yml
 		InfrastruturePipeline.yml = InfrastruturePipeline.yml
 		RazorComponentsPipeline.yml = RazorComponentsPipeline.yml
+		SessionStoragePipeline.yml = SessionStoragePipeline.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8B83383C-9CE4-434A-9992-FCAC651844D8}"
@@ -21,7 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majunga.Libraries.Client", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majunga.Libraries.Infrastructure", "Majunga.Libraries\Infrastructure\Majunga.Libraries.Infrastructure.csproj", "{0988C6E5-BB96-4F19-9EBA-A4E364B477EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Majunga.Libraries.Asl", "Majunga.Libraries\Asl\Majunga.Libraries.Asl.csproj", "{CE60C7EA-DEE2-4E86-B6DA-95DB8CB30DCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majunga.Libraries.Asl", "Majunga.Libraries\Asl\Majunga.Libraries.Asl.csproj", "{CE60C7EA-DEE2-4E86-B6DA-95DB8CB30DCF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majunga.Libraries.SessionStorage", "Majunga.Libraries\SessionStorage\Majunga.Libraries.SessionStorage.csproj", "{3074A410-AE94-471D-A5BA-5ABD43408677}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Majunga.Libraries.Auth", "Majunga.Libraries\Auth\Majunga.Libraries.Auth.csproj", "{7C350E77-5F37-4018-952D-AF1A80549010}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +55,14 @@ Global
 		{CE60C7EA-DEE2-4E86-B6DA-95DB8CB30DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE60C7EA-DEE2-4E86-B6DA-95DB8CB30DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE60C7EA-DEE2-4E86-B6DA-95DB8CB30DCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3074A410-AE94-471D-A5BA-5ABD43408677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3074A410-AE94-471D-A5BA-5ABD43408677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3074A410-AE94-471D-A5BA-5ABD43408677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3074A410-AE94-471D-A5BA-5ABD43408677}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C350E77-5F37-4018-952D-AF1A80549010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C350E77-5F37-4018-952D-AF1A80549010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C350E77-5F37-4018-952D-AF1A80549010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C350E77-5F37-4018-952D-AF1A80549010}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
