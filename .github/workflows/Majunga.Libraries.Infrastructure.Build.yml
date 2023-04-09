@@ -1,0 +1,32 @@
+name: build
+
+on:
+  push:
+    branches: [ "master" ]
+    paths: 
+     - 'Majunga.Libraries.Infrastructure/**'
+
+  pull_request:
+    branches: [ "master" ]
+    paths:  
+     - 'Majunga.Libraries.Infrastructure/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      project: ./Majunga.Libraries.Infrastructure/Majunga.Libraries.Infrastructure.csproj
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+    - name: Restore dependencies
+      run: dotnet restore $project
+    - name: Build
+      run: dotnet build $project --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    - name: Publish
+      run: dotnet nuget push ./src/bin/**/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET}}
