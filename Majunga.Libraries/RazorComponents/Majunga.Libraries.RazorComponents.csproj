@@ -4,8 +4,8 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<VersionPrefix>7.0.5</VersionPrefix>
-		<PackageReleaseNotes>Added error handling for submitting forms, as it's annoying trying to work out why it doesn't work xD</PackageReleaseNotes>
+		<VersionPrefix>7.0.6</VersionPrefix>
+		<PackageReleaseNotes>Added ClaimsTesting Component</PackageReleaseNotes>
 		<EnableDefaultContentItems>true</EnableDefaultContentItems>
 		<RazorCompileOnPublish>true</RazorCompileOnPublish>
 
@@ -22,6 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.4" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Forms" Version="7.0.4" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.4" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.4" />
