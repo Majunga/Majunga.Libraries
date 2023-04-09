@@ -5,6 +5,7 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{F8831353-3F91-489D-AA1E-C7965294E230}"
 	ProjectSection(SolutionItems) = preProject
+		AslPipeline.yml = AslPipeline.yml
 		ClientPipeline.yml = ClientPipeline.yml
 		InfrastruturePipeline.yml = InfrastruturePipeline.yml
 		RazorComponentsPipeline.yml = RazorComponentsPipeline.yml
@@ -19,6 +20,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majunga.Libraries.Client", "Majunga.Libraries\Client\Majunga.Libraries.Client.csproj", "{8B6EAEB6-2E2A-447C-B53C-480F143BB344}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majunga.Libraries.Infrastructure", "Majunga.Libraries\Infrastructure\Majunga.Libraries.Infrastructure.csproj", "{0988C6E5-BB96-4F19-9EBA-A4E364B477EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Majunga.Libraries.Asl", "Majunga.Libraries\Asl\Majunga.Libraries.Asl.csproj", "{CE60C7EA-DEE2-4E86-B6DA-95DB8CB30DCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +45,10 @@ Global
 		{0988C6E5-BB96-4F19-9EBA-A4E364B477EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0988C6E5-BB96-4F19-9EBA-A4E364B477EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0988C6E5-BB96-4F19-9EBA-A4E364B477EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE60C7EA-DEE2-4E86-B6DA-95DB8CB30DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE60C7EA-DEE2-4E86-B6DA-95DB8CB30DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE60C7EA-DEE2-4E86-B6DA-95DB8CB30DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE60C7EA-DEE2-4E86-B6DA-95DB8CB30DCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
