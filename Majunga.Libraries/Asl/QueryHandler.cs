@@ -3,7 +3,7 @@ using Majunga.Libraries.Infrastructure.Services;
 using System;
 using System.Threading.Tasks;
 
-namespace Majunga.Auth.Asl.Queries
+namespace Majunga.Libraries.Asl
 {
     public abstract class QueryHandler<TQuery, TResult> : IQueryHandler<TQuery, TResult>
         where TQuery : IQuery<TResult>
@@ -15,17 +15,17 @@ namespace Majunga.Auth.Asl.Queries
         {
             _conversionService = conversionService;
         }
-        
+
         public virtual async Task<TResult?> Query(TQuery query)
         {
-            if(query == null)
+            if (query == null)
                 throw new ArgumentNullException(nameof(query));
-            
+
             var rawResult = await RunQuery(query);
 
             if (rawResult == null) return default;
 
-            return this.Convert<TResult>(rawResult);
+            return Convert<TResult>(rawResult);
         }
 
         protected abstract Task<object?> RunQuery(TQuery query);
@@ -40,7 +40,7 @@ namespace Majunga.Auth.Asl.Queries
 
         protected void Map(object source, object target)
         {
-            this._conversionService.Map(source, target);
+            _conversionService.Map(source, target);
         }
 
         #endregion

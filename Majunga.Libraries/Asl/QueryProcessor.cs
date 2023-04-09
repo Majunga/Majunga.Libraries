@@ -5,12 +5,6 @@ using System.Threading.Tasks;
 
 namespace Majunga.Libraries.Asl
 {
-    public interface IQueryProcessor
-    {
-        Task<TResult?> Process<TResult>(IQuery<TResult> query)
-            where TResult : class;
-    }
-
     public class QueryProcessor : IQueryProcessor
     {
         private readonly IServiceProvider _services;
