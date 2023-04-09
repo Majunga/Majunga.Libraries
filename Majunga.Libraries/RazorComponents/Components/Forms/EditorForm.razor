@@ -62,8 +62,16 @@
     public async Task Submit()
     {
         // Work around, as you can't directly submit a EditForm without a button in it's scope
-        await IJSRuntime.InvokeVoidAsync("submitForm", Id);
+        try
+        {
+            await IJSRuntime.InvokeVoidAsync("submitForm", Id);
+        }
+        catch (Exception)
+        {
+            await IJSRuntime.InvokeVoidAsync("console.error", "Failed to submit form, this is usually due to not including '_content/Majunga.Libraries.RazorComponents/js/RazorComponents.js' at the bottom of your index.html");
+        }
     }
+
 
     public void SetEditorContext(@Object? model)
     {
