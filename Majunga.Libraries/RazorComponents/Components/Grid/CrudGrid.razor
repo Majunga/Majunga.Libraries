@@ -1,0 +1,170 @@
+﻿@using Majunga.Libraries.Client.HttpRepositories;
+@using Majunga.Libraries.Infrastructure;
+@using Majunga.Libraries.Infrastructure.Entities;
+@using Majunga.Libraries.RazorComponents.Components.Forms;
+@using Majunga.Libraries.RazorComponents.Components.Popup
+@using Majunga.Libraries.RazorComponents.Services;
+
+@typeparam TKey
+@typeparam TModel where TModel : class, IEntity<TKey>, new()
+
+@inject AlertState AlertState
+
+<Grid TModelItem="TModel" Data="@Model">
+    <GridToolbarTop>
+        @if (_dataSource != null && _dataSource.Create != null)
+        {
+            <button class="btn btn-primary" @onclick="@(() => ShowPopup(new TModel()))">Add</button>
+        }
+    </GridToolbarTop>
+
+    <Columns>
+        @Columns
+
+        <GridColumnCommand Title="Actions" TModelItem="TModel">
+            @if (_dataSource != null && (_dataSource.Update != null || _dataSource.Delete != null))
+            {
+                <div class="btn-group">
+                    @if (_dataSource.Update != null)
+                    {
+                        <button class="btn btn-secondary" @onclick="@(() => ShowPopup(context))">Edit</button>
+                    }
+                    @if (_dataSource.Delete != null)
+                    {
+                        <button class="btn btn-danger" @onclick="@(() => _confirm!.Show(() => Delete(context)))">Delete</button>
+                    }
+                </div>
+            }
+        </GridColumnCommand>
+    </Columns>
+</Grid>
+
+<Confirm @ref="_confirm" OnHide="@LoadGrid" />
+
+<EditorPopup TModel="TModel" Model="@new()" @ref="_editorPopup" OnHide="@LoadGrid" Title="Edit User" OnValidSubmit="@OnValidSubmitAsync">
+    @EditorInputs?.Invoke(_currentModel)
+</EditorPopup>
+
+@code {
+    private Confirm? _confirm;
+    private EditorPopup<TModel>? _editorPopup;
+
+    private DataSource<TKey, TModel> _dataSource = new DataSource<TKey, TModel>();
+
+    private TModel _currentModel = new();
+
+    [Parameter]
+    public IReadOnlyCollection<TModel> Model { get; set; } = new List<TModel>();
+
+    [Parameter]
+    public RenderFragment? Columns { get; set; }
+
+    [Parameter]
+    public RenderFragment<TModel>? EditorInputs { get; set; }
+
+    [Parameter]
+    public Action<DataSource<TKey, TModel>>? DataSource { get; set; }
+
+    [Parameter]
+    public string? CreateSuccessMessage { get; set; }
+
+    [Parameter]
+    public string? UpdateSuccessMessage { get; set; }
+
+    [Parameter]
+    public string? DeleteSuccessMessage { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (DataSource != null)
+            DataSource.Invoke(_dataSource);
+
+        await LoadGrid();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task LoadGrid()
+    {
+        if (_dataSource == null || _dataSource.ReadAll == null) return;
+
+        var result = await _dataSource.ReadAll();
+
+        if (result.IsSuccessStatusCode)
+        {
+            Model = result.GetData<IReadOnlyCollection<TModel>>() ?? new List<TModel>();
+        }
+        else
+        {
+            AlertState.Error(result.Message ?? "Failed to load grid!");
+        }
+    }
+
+    private async Task ShowPopup(TModel model)
+    {
+        if (_dataSource == null || _dataSource.Read == null) return;
+        var result = await _dataSource.Read(model.Id);
+
+        if (result.IsSuccessStatusCode)
+        {
+            _currentModel = result.GetData<TModel>() ?? new();
+            _editorPopup!.EditorForm!.SetEditorContext(new EditContext(_currentModel));
+        }
+        else
+        {
+            AlertState.Error(result.Message ?? "Failed to get data!");
+        }
+
+        await _editorPopup!.PopupReference!.Show();
+    }
+
+    private async Task OnValidSubmitAsync()
+    {
+        if (_currentModel == null || _dataSource == null) return;
+        AlertState.ClearAll();
+
+        var isNew = _currentModel.Id == null;
+
+        ApiResponse response;
+        if (isNew && _dataSource.Create != null)
+        {
+            response = await _dataSource.Create(_currentModel);
+        }
+        else if(_dataSource.Update != null)
+        {
+            response = await _dataSource.Update(_currentModel.Id, _currentModel);
+        }
+        else
+        {
+            return;
+        }
+
+        if (response.IsSuccessStatusCode)
+        {
+            await _editorPopup!.PopupReference!.Hide();
+            AlertState.Success(response.Message ?? (isNew ? (CreateSuccessMessage ?? "Successfully created!") : (UpdateSuccessMessage ?? "Successfully updated!")));
+        }
+        else
+        {
+            AlertState.Error(response.Message ?? $"Failed to {(isNew ? "create" : "update")}!");
+        }
+
+        StateHasChanged();
+    }
+
+    private async Task Delete(TModel model)
+    {
+        if (_dataSource == null || _dataSource.Delete == null) return;
+        var result = await _dataSource.Delete(model.Id);
+
+        if (result.IsSuccessStatusCode)
+        {
+            AlertState.Success(result.Message ?? "Successfully deleted!");
+        }
+        else
+        {
+            AlertState.Error(result.Message ?? "Failed to delete!");
+        }
+
+        await LoadGrid();
+    }
+}

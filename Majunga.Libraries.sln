@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majunga.Libraries.RazorComp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majunga.Libraries.Client", "Majunga.Libraries\Client\Majunga.Libraries.Client.csproj", "{8B6EAEB6-2E2A-447C-B53C-480F143BB344}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Majunga.Libraries.Infrastructure", "Majunga.Libraries.Infrastructure\Majunga.Libraries.Infrastructure.csproj", "{47EF0453-0D04-49B6-8D68-4972E134F21F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{8B6EAEB6-2E2A-447C-B53C-480F143BB344}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B6EAEB6-2E2A-447C-B53C-480F143BB344}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B6EAEB6-2E2A-447C-B53C-480F143BB344}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47EF0453-0D04-49B6-8D68-4972E134F21F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47EF0453-0D04-49B6-8D68-4972E134F21F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47EF0453-0D04-49B6-8D68-4972E134F21F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47EF0453-0D04-49B6-8D68-4972E134F21F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

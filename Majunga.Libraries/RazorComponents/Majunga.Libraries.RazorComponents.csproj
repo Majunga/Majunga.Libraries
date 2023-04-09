@@ -1,30 +1,41 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-
 	<PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-	<Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<VersionPrefix>7.0.3</VersionPrefix>
-    <PackageReleaseNotes>Added Confirmation Popup</PackageReleaseNotes>
-	<EnableDefaultContentItems>true</EnableDefaultContentItems>
-	<RazorCompileOnPublish>true</RazorCompileOnPublish>
-  </PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<VersionPrefix>7.0.4</VersionPrefix>
+		<PackageReleaseNotes>CrudGrid :o</PackageReleaseNotes>
+		<EnableDefaultContentItems>true</EnableDefaultContentItems>
+		<RazorCompileOnPublish>true</RazorCompileOnPublish>
+
+		<RepositoryUrl>https://github.com/Majunga/Majunga.Libraries</RepositoryUrl>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Forms" Version="7.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.4" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.Forms" Version="7.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.4" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Update="wwwroot\js\RazorComponents.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Majunga.Libraries.Infrastructure\Majunga.Libraries.Infrastructure.csproj" />
+		<ProjectReference Include="..\Client\Majunga.Libraries.Client.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Update="wwwroot\js\RazorComponents.js">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
 </Project>
