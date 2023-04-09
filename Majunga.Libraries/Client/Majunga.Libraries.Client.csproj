@@ -1,11 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
 		<VersionPrefix>7.1.0</VersionPrefix>
 		<PackageReleaseNotes>Change up of HttpRepos</PackageReleaseNotes>
-		Majunga.Libraries.Infrastructure
 		<RepositoryUrl>https://github.com/Majunga/Majunga.Libraries</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -29,4 +27,7 @@
 		<PackageReference Include="System.Text.Json" Version="7.0.2" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Infrastructure\Majunga.Libraries.Infrastructure.csproj" />
+	</ItemGroup>
 </Project>
