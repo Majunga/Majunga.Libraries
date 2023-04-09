@@ -28,7 +28,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Majunga.Libraries.Infrastructure\Majunga.Libraries.Infrastructure.csproj" />
 		<ProjectReference Include="..\Client\Majunga.Libraries.Client.csproj" />
 	</ItemGroup>
 

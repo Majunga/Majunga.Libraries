@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<VersionPrefix>7.1.0</VersionPrefix>
 		<PackageReleaseNotes>Change up of HttpRepos</PackageReleaseNotes>
-		
+		Majunga.Libraries.Infrastructure
 		<RepositoryUrl>https://github.com/Majunga/Majunga.Libraries</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -27,10 +27,6 @@
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="12.0.1" />
 		<PackageReference Include="System.Text.Json" Version="7.0.2" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\..\Majunga.Libraries.Infrastructure\Majunga.Libraries.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>
