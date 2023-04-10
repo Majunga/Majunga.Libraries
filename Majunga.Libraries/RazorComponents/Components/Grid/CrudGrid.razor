@@ -100,6 +100,7 @@
         }
     }
 
+    private bool _isNew = false;
     private async Task ShowPopup(TModel? model = null)
     {
         if (_dataSource == null || _dataSource.Read == null) return;
@@ -107,6 +108,7 @@
         if (model == null)
         {
             _currentModel = new();
+            _isNew = true;
         }
         else
         {
@@ -115,6 +117,7 @@
             if (result.IsSuccessStatusCode)
             {
                 _currentModel = result.GetData<TModel>() ?? new();
+                _isNew = false;
             }
             else
             {
@@ -132,10 +135,8 @@
         if (_currentModel == null || _dataSource == null) return;
         AlertState.ClearAll();
 
-        var isNew = _currentModel.Id == null;
-
         ApiResponse response;
-        if (isNew && _dataSource.Create != null)
+        if (_isNew && _dataSource.Create != null)
         {
             response = await _dataSource.Create(_currentModel);
         }
@@ -151,11 +152,11 @@
         if (response.IsSuccessStatusCode)
         {
             await _editorPopup!.PopupReference!.Hide();
-            AlertState.Success(response.Message ?? (isNew ? (CreateSuccessMessage ?? "Successfully created!") : (UpdateSuccessMessage ?? "Successfully updated!")));
+            AlertState.Success(response.Message ?? (_isNew ? (CreateSuccessMessage ?? "Successfully created!") : (UpdateSuccessMessage ?? "Successfully updated!")));
         }
         else
         {
-            AlertState.Error(response.Message ?? $"Failed to {(isNew ? "create" : "update")}!");
+            AlertState.Error(response.Message ?? $"Failed to {(_isNew ? "create" : "update")}!");
         }
 
         StateHasChanged();
