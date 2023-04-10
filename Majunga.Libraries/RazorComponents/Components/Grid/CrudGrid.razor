@@ -12,7 +12,7 @@
 
 <Grid TModelItem="TModel" Data="@Model">
     <GridToolbarTop>
-        @if (_dataSource != null && _dataSource.Create != null)
+        @if (_dataSource != null && _dataSource.Post != null)
         {
             <button class="btn btn-primary" @onclick="@(() => ShowPopup())">Add</button>
         }
@@ -20,12 +20,12 @@
 
     <Columns>
         @Columns
-        @if (_dataSource != null && (_dataSource.Update != null || _dataSource.Delete != null))
+        @if (_dataSource != null && (_dataSource.Put != null || _dataSource.Delete != null))
         {
             <GridColumnCommand Title="Actions" TModelItem="TModel">
 
                 <div class="btn-group">
-                    @if (_dataSource.Update != null)
+                    @if (_dataSource.Put != null)
                     {
                         <button class="btn btn-secondary" @onclick="@(() => ShowPopup(context))">Edit</button>
                     }
@@ -86,9 +86,9 @@
 
     private async Task LoadGrid()
     {
-        if (_dataSource == null || _dataSource.ReadAll == null) return;
+        if (_dataSource == null || _dataSource.Get == null) return;
 
-        var result = await _dataSource.ReadAll();
+        var result = await _dataSource.Get();
 
         if (result.IsSuccessStatusCode)
         {
@@ -103,7 +103,7 @@
     private bool _isNew = false;
     private async Task ShowPopup(TModel? model = null)
     {
-        if (_dataSource == null || _dataSource.Read == null) return;
+        if (_dataSource == null || _dataSource.Get == null) return;
 
         if (model == null)
         {
@@ -112,7 +112,7 @@
         }
         else
         {
-            var result = await _dataSource.Read(model.Id);
+            var result = await _dataSource.Get(model.Id);
 
             if (result.IsSuccessStatusCode)
             {
@@ -136,13 +136,13 @@
         AlertState.ClearAll();
 
         ApiResponse response;
-        if (_isNew && _dataSource.Create != null)
+        if (_isNew && _dataSource.Post != null)
         {
-            response = await _dataSource.Create(_currentModel);
+            response = await _dataSource.Post(_currentModel);
         }
-        else if (_dataSource.Update != null)
+        else if (_dataSource.Put != null)
         {
-            response = await _dataSource.Update(_currentModel.Id, _currentModel);
+            response = await _dataSource.Put(_currentModel.Id, _currentModel);
         }
         else
         {

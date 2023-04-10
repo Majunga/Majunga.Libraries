@@ -4,8 +4,8 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<VersionPrefix>7.0.9</VersionPrefix>
-		<PackageReleaseNotes>Bug: Id of an entity can be not null if it's a guid. so to find out if the action was create, I needed to add a bool that is set during the Showing of the popup</PackageReleaseNotes>
+		<VersionPrefix>7.1.0</VersionPrefix>
+		<PackageReleaseNotes>Fixed DataSource to match HttpRepo base classes</PackageReleaseNotes>
 		<EnableDefaultContentItems>true</EnableDefaultContentItems>
 		<RazorCompileOnPublish>true</RazorCompileOnPublish>
 
