@@ -4,8 +4,8 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<VersionPrefix>7.0.8</VersionPrefix>
-		<PackageReleaseNotes>Fixed Grid so that if there are no Edit/Delete actions, it will no longer show the column</PackageReleaseNotes>
+		<VersionPrefix>7.0.9</VersionPrefix>
+		<PackageReleaseNotes>Bug: Id of an entity can be not null if it's a guid. so to find out if the action was create, I needed to add a bool that is set during the Showing of the popup</PackageReleaseNotes>
 		<EnableDefaultContentItems>true</EnableDefaultContentItems>
 		<RazorCompileOnPublish>true</RazorCompileOnPublish>
 
