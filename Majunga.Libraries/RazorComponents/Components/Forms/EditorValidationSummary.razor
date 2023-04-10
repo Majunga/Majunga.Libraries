@@ -1,0 +1,20 @@
+﻿@inherits ValidationSummary
+
+@if (validationMessages.Count() > 0)
+{
+    <div class="alert alert-danger" role="alert">
+        @foreach (var error in validationMessages)
+        {
+            @error
+            <br />
+        }
+    </div>
+}
+
+@code {
+    [CascadingParameter] EditContext ThisEditContext { get; set; } = default!;
+
+    private IEnumerable<string> validationMessages => Model is null ?
+            ThisEditContext.GetValidationMessages() :
+            ThisEditContext.GetValidationMessages(new FieldIdentifier(Model, string.Empty));
+}
