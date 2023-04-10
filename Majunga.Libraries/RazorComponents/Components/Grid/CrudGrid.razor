@@ -14,7 +14,7 @@
     <GridToolbarTop>
         @if (_dataSource != null && _dataSource.Create != null)
         {
-            <button class="btn btn-primary" @onclick="@(() => ShowPopup(new TModel()))">Add</button>
+            <button class="btn btn-primary" @onclick="@(() => ShowPopup())">Add</button>
         }
     </GridToolbarTop>
 
@@ -100,20 +100,29 @@
         }
     }
 
-    private async Task ShowPopup(TModel model)
+    private async Task ShowPopup(TModel? model = null)
     {
         if (_dataSource == null || _dataSource.Read == null) return;
-        var result = await _dataSource.Read(model.Id);
 
-        if (result.IsSuccessStatusCode)
+        if (model == null)
         {
-            _currentModel = result.GetData<TModel>() ?? new();
-            _editorPopup!.EditorForm!.SetEditorContext(new EditContext(_currentModel));
+            _currentModel = new();
         }
         else
         {
-            AlertState.Error(result.Message ?? "Failed to get data!");
+            var result = await _dataSource.Read(model.Id);
+
+            if (result.IsSuccessStatusCode)
+            {
+                _currentModel = result.GetData<TModel>() ?? new();
+            }
+            else
+            {
+                AlertState.Error(result.Message ?? "Failed to get data!");
+            }
         }
+
+        _editorPopup!.EditorForm!.SetEditorContext(new EditContext(_currentModel));
 
         await _editorPopup!.PopupReference!.Show();
     }
