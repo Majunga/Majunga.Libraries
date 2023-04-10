@@ -1,0 +1,55 @@
+﻿@page "/crudGridStory"
+
+@using Majunga.Libraries.Infrastructure;
+@using Majunga.Libraries.Infrastructure.Entities;
+@using Majunga.Libraries.RazorComponents.Components.Grid
+@using Majunga.Libraries.RazorComponents.Components.Forms
+@using System.Net;
+@using System.ComponentModel.DataAnnotations;
+
+
+<CrudGrid TKey="string" TModel="WeatherForecast"
+    DataSource="@((d) => {
+    d.GetAll = () => Task.Run(() => ApiResponse.Success(HttpStatusCode.OK, _list));
+    d.Post = (WeatherForecast model) => {
+        Add(model);
+        return Task.Run(() => ApiResponse.Create(HttpStatusCode.OK));
+    };
+})">
+    <Columns>
+        <GridColumn Title="Id" Field="@nameof(WeatherForecast.Id)" IsKey="true" />
+        <GridColumn Title="Date" Field="@nameof(WeatherForecast.Date)" DisplayFormat="{0:dd MMM yyyy}" />
+        <GridColumn Title="TemperatureC" Field="@nameof(WeatherForecast.TemperatureC)" DisplayFormat="{0:N0}°C" />
+        <GridColumn Title="TemperatureF" Field="@nameof(WeatherForecast.TemperatureF)" DisplayFormat="{0:N2}°F" />
+        <GridColumn Title="Summary" Field="@nameof(WeatherForecast.Summary)" />
+    </Columns>
+    <EditorInputs>
+        <EditorDate @bind-Value="context.Date" Label="Date" />
+        <EditorNumber @bind-Value="context.TemperatureC" Label="TemperatureC" />
+        <EditorText @bind-Value="context.Summary" Label="Summary" />
+    </EditorInputs>
+    
+</CrudGrid>
+
+@code {
+    private List<WeatherForecast> _list { get; set; } = new();
+
+    private void Add(WeatherForecast model)
+    {
+        model.Id = Guid.NewGuid().ToString();
+        _list.Add(model);
+    }
+
+    public class WeatherForecast : EntityBase<string>
+    {
+        public string Id { get; set; } = null!;
+        public DateTime Date { get; set; }
+
+        public int TemperatureC { get; set; }
+
+        [Required]
+        public string? Summary { get; set; }
+
+        public double TemperatureF => 32 + (TemperatureC / 0.5556);
+    }
+}
