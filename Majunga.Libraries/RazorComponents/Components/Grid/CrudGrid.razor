@@ -42,7 +42,7 @@
 
 <Confirm @ref="_confirm" OnHide="@LoadGrid" />
 
-<EditorPopup TModel="TModel" Model="@new()" @ref="_editorPopup" OnHide="@LoadGrid" Title="Edit User" OnValidSubmit="@OnValidSubmitAsync">
+<EditorPopup TModel="TModel" Model="@_currentModel" @ref="_editorPopup" OnHide="@LoadGrid" Title="Edit User" OnValidSubmit="@OnValidSubmitAsync" OnInvalidSubmit="@OnInvalidSubmit">
     @EditorInputs?.Invoke(_currentModel)
 </EditorPopup>
 
@@ -75,6 +75,8 @@
     [Parameter]
     public string? DeleteSuccessMessage { get; set; }
 
+    [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         if (DataSource != null)
@@ -103,14 +105,14 @@
     private bool _isNew = false;
     private async Task ShowPopup(TModel? model = null)
     {
-        if (_dataSource == null || _dataSource.Get == null) return;
+        if (_dataSource == null) return;
 
         if (model == null)
         {
             _currentModel = new();
             _isNew = true;
         }
-        else
+        else if (_dataSource.Get != null)
         {
             var result = await _dataSource.Get(model.Id);
 
@@ -124,8 +126,12 @@
                 AlertState.Error(result.Message ?? "Failed to get data!");
             }
         }
+        else
+        {
+            return;
+        }
 
-        _editorPopup!.EditorForm!.SetEditorContext(new EditContext(_currentModel));
+        _editorPopup!.EditorForm!.SetEditorContext(_currentModel);
 
         await _editorPopup!.PopupReference!.Show();
     }
