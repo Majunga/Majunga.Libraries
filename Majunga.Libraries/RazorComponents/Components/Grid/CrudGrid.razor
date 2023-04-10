@@ -86,9 +86,9 @@
 
     private async Task LoadGrid()
     {
-        if (_dataSource == null || _dataSource.Get == null) return;
+        if (_dataSource == null || _dataSource.GetAll == null) return;
 
-        var result = await _dataSource.Get();
+        var result = await _dataSource.GetAll();
 
         if (result.IsSuccessStatusCode)
         {
@@ -142,7 +142,7 @@
         }
         else if (_dataSource.Put != null)
         {
-            response = await _dataSource.Put(_currentModel.Id, _currentModel);
+            response = await _dataSource.Put(_currentModel);
         }
         else
         {
