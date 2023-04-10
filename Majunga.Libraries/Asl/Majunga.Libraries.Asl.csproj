@@ -2,8 +2,8 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
-		<VersionPrefix>1.0.3</VersionPrefix>
-		<PackageReleaseNotes>Fixed issue where IQueryProcessor wasn't moved to IAsl</PackageReleaseNotes>
+		<VersionPrefix>1.1.0</VersionPrefix>
+		<PackageReleaseNotes>Updated Command handler to have Conversion service by default, and moved it around a bit to share code</PackageReleaseNotes>
 		<RepositoryUrl>https://github.com/Majunga/Majunga.Libraries</RepositoryUrl>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>

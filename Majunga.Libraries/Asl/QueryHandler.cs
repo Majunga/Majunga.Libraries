@@ -5,15 +5,12 @@ using System.Threading.Tasks;
 
 namespace Majunga.Libraries.Asl
 {
-    public abstract class QueryHandler<TQuery, TResult> : IQueryHandler<TQuery, TResult>
+    public abstract class QueryHandler<TQuery, TResult> : HandlerBase, IQueryHandler<TQuery, TResult>
         where TQuery : IQuery<TResult>
         where TResult : class
     {
-        private readonly IConversionService _conversionService;
-
-        public QueryHandler(IConversionService conversionService)
+        public QueryHandler(IConversionService conversionService) : base(conversionService)
         {
-            _conversionService = conversionService;
         }
 
         public virtual async Task<TResult?> Query(TQuery query)
@@ -29,20 +26,5 @@ namespace Majunga.Libraries.Asl
         }
 
         protected abstract Task<object?> RunQuery(TQuery query);
-
-        #region Conversion
-
-        protected T? Convert<T>(object source)
-            where T : class
-        {
-            return _conversionService.Convert<T>(source);
-        }
-
-        protected void Map(object source, object target)
-        {
-            _conversionService.Map(source, target);
-        }
-
-        #endregion
     }
 }
