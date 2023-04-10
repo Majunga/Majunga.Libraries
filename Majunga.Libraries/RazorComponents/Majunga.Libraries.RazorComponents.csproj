@@ -4,8 +4,8 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<VersionPrefix>7.0.6</VersionPrefix>
-		<PackageReleaseNotes>Added ClaimsTesting Component</PackageReleaseNotes>
+		<VersionPrefix>7.0.7</VersionPrefix>
+		<PackageReleaseNotes>Fixed Grid so that if there are no Edit/Delete actions, it will no longer show the column</PackageReleaseNotes>
 		<EnableDefaultContentItems>true</EnableDefaultContentItems>
 		<RazorCompileOnPublish>true</RazorCompileOnPublish>
 

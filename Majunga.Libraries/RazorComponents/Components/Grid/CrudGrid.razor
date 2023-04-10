@@ -20,10 +20,10 @@
 
     <Columns>
         @Columns
+        @if (_dataSource != null && (_dataSource.Update != null || _dataSource.Delete != null))
+        {
+            <GridColumnCommand Title="Actions" TModelItem="TModel">
 
-        <GridColumnCommand Title="Actions" TModelItem="TModel">
-            @if (_dataSource != null && (_dataSource.Update != null || _dataSource.Delete != null))
-            {
                 <div class="btn-group">
                     @if (_dataSource.Update != null)
                     {
@@ -34,8 +34,9 @@
                         <button class="btn btn-danger" @onclick="@(() => _confirm!.Show(() => Delete(context)))">Delete</button>
                     }
                 </div>
-            }
-        </GridColumnCommand>
+            </GridColumnCommand>
+        }
+
     </Columns>
 </Grid>
 
@@ -129,7 +130,7 @@
         {
             response = await _dataSource.Create(_currentModel);
         }
-        else if(_dataSource.Update != null)
+        else if (_dataSource.Update != null)
         {
             response = await _dataSource.Update(_currentModel.Id, _currentModel);
         }
