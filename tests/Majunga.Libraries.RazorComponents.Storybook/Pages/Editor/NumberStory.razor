@@ -1,0 +1,44 @@
+﻿@page "/editor/numberstory"
+@using Majunga.Libraries.RazorComponents.Components.Forms
+@using Majunga.Libraries.RazorComponents.Services
+@using System.ComponentModel.DataAnnotations
+@inject AlertState AlertState
+
+<EditorForm Model="@model" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+    <EditorNumber @bind-Value="model.Number" />
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditorForm>
+
+@code {
+    private TestModel model = new ();
+
+    protected override void OnInitialized()
+    {
+        model = new TestModel();
+        base.OnInitialized();
+    }
+
+    private void HandleValidSubmit()
+    {
+        AlertState.ClearAll();
+
+        AlertState.Success($"Submitted Input {model.Number}");
+    }
+    
+    private void HandleInvalidSubmit()
+    {
+        AlertState.ClearAll();
+
+        AlertState.Error($"Submitted Input {model.Number}");
+    }
+
+    public class TestModel
+    {
+        [Required]
+        [Range(10f, 20f)]
+        public float? Number { get; set; }
+    }
+}
+
+
