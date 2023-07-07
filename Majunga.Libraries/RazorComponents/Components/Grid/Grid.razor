@@ -88,7 +88,7 @@
         if (string.IsNullOrWhiteSpace(column.DisplayFormat) == false && value != null)
         {
             var convertedValue = Convert.ChangeType(value, property!.PropertyType);
-            return string.Format(column.DisplayFormat, convertedValue);
+            return convertedValue == null ? string.Empty : string.Format(column.DisplayFormat, convertedValue);
         }
 
         return value?.ToString() ?? string.Empty;
