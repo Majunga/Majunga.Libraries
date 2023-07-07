@@ -21,7 +21,7 @@ namespace Majunga.Libraries.Infrastructure.Entities
         }
 
         [Key]
-        public TKey Id { get; set; }
+        public virtual TKey Id { get; set; }
 
         internal void SetId(TKey id)
         {
