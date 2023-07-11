@@ -85,10 +85,11 @@
         var property = modelType.GetProperty(column.Field);
         var value = property?.GetValue(model) ?? null;
 
-        if (string.IsNullOrWhiteSpace(column.DisplayFormat) == false && value != null)
+        if (string.IsNullOrWhiteSpace(column.DisplayFormat) == false && value != null && property != null)
         {
-            var convertedValue = Convert.ChangeType(value, property!.PropertyType);
-            return convertedValue == null ? string.Empty : string.Format(column.DisplayFormat, convertedValue);
+            var propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+            var convertedValue = Convert.ChangeType(value, propertyType);
+            return string.Format(column.DisplayFormat, convertedValue);
         }
 
         return value?.ToString() ?? string.Empty;
