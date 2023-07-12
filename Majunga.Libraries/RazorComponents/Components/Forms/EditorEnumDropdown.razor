@@ -3,6 +3,13 @@
 
 @using System.Linq.Expressions
 <div class="form-group">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <label for="@Id" class="form-label">
+            @Label
+        </label>
+    }
+    
     <InputSelect class="form-select" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="@AdditionalAttributes" >
         @{
             var i = 0;
@@ -30,6 +37,8 @@
 
     [Parameter] public string DefaultValue { get; set; } = "Please Select";
 
+    [Parameter] public string? Id { get; set; }
+    [Parameter] public string? Label { get; set; }
     [Parameter] public TEnum?                   Value           { get; set; }
     [Parameter] public EventCallback<TEnum?>    ValueChanged    { get; set; }
     [Parameter] public Expression<Func<TEnum?>>? ValueExpression { get; set; }

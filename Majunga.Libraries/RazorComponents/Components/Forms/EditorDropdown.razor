@@ -4,6 +4,13 @@
 
 @using System.Linq.Expressions
 <div class="form-group">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <label for="@Id" class="form-label">
+            @Label
+        </label>
+    }
+    
     <InputSelect class="form-select" Value="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" @attributes="@AdditionalAttributes" >
         @foreach (var item in Items)
         {
@@ -21,6 +28,8 @@
 
     [Parameter] public string DefaultValue { get; set; } = "Please Select";
 
+    [Parameter] public string? Id { get; set; }
+    [Parameter] public string? Label { get; set; }
     [Parameter] public TSelected?                   Value           { get; set; }
     [Parameter] public EventCallback<TSelected>     ValueChanged    { get; set; }
     [Parameter] public Expression<Func<TSelected>>? ValueExpression { get; set; }
