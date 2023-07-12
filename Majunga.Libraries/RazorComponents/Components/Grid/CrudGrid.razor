@@ -86,7 +86,7 @@
         await base.OnInitializedAsync();
     }
 
-    private async Task LoadGrid()
+    public async Task LoadGrid()
     {
         if (_dataSource == null || _dataSource.GetAll == null) return;
 
